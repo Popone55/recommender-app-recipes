@@ -15,7 +15,6 @@ export interface RecipesSearchContextValue {
   setCategoryValue: (categoryValue: string | null) => void
   ingredientValue: string | null
   setIngredientValue: (ingredientValue: string | null) => void
-  resetAdvancedPreferences: () => void
 }
 
 export const RecipesSearchContext = createContext<RecipesSearchContextValue>(

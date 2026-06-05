@@ -1,7 +1,6 @@
 import { Button } from '@components/atoms/Button/Button'
 import { PillButton } from '@components/atoms/PillButton/PillButton'
 import { Typography } from '@components/atoms/Typography/Typography'
-import { useEffectOnceWhen } from '@hooks/useEffectOnceWhen'
 import { useNavigate } from '@tanstack/react-router'
 import { X } from 'lucide-react'
 import { useCallback } from 'react'
@@ -14,8 +13,7 @@ export const BasicPreferences = () => {
     areaOfInterest,
     setAreaOfInterest,
     setAreaOfInterestValue,
-    canContinueToAdvancedPreferences,
-    resetAdvancedPreferences
+    canContinueToAdvancedPreferences
   } = useRecipesSearch()
   const navigate = useNavigate()
 
@@ -23,10 +21,6 @@ export const BasicPreferences = () => {
     setAreaOfInterest(null)
     setAreaOfInterestValue(null)
   }, [setAreaOfInterest, setAreaOfInterestValue])
-
-  useEffectOnceWhen(() => {
-    resetAdvancedPreferences()
-  })
 
   return (
     <SearchSection

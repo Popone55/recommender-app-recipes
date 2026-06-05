@@ -71,7 +71,10 @@ export const Autocomplete = <TData, TOption>({
   const listRef = useRef<Array<HTMLElement | null>>([])
 
   const handleOpenChange = useCallback((shouldOpen: boolean) => {
-    if (!shouldOpen) setActiveIndex(null)
+    if (!shouldOpen) {
+      setActiveIndex(null)
+      listRef.current = []
+    }
     setOpen(shouldOpen)
   }, [])
 
@@ -126,8 +129,10 @@ export const Autocomplete = <TData, TOption>({
     listNavigation
   ])
 
-  const showDropdown = open && !disabled
-  const activeOptionId = activeIndex === null ? undefined : `${listboxId}-option-${activeIndex}`
+  const activeOptionId = useMemo(() => {
+    if (!open || activeIndex === null) return undefined
+    return `${listboxId}-option-${activeIndex}`
+  }, [listboxId, open, activeIndex])
 
   const referenceProps = getReferenceProps({
     onFocus: () => setOpen(true)
@@ -181,7 +186,7 @@ export const Autocomplete = <TData, TOption>({
         role="combobox"
         aria-expanded={open}
         aria-autocomplete="list"
-        aria-controls={listboxId}
+        aria-controls={open ? listboxId : undefined}
         aria-activedescendant={activeOptionId}
         onChange={(nextValue) => {
           onChange(nextValue)
@@ -206,7 +211,7 @@ export const Autocomplete = <TData, TOption>({
         }
       />
 
-      {showDropdown && (
+      {open && !disabled && (
         <FloatingPortal>
           <div
             {...getFloatingProps({
