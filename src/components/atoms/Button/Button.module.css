@@ -1,8 +1,9 @@
 .root {
   box-sizing: border-box;
   outline: none;
-  font-family: medium;
+  font-weight: bold;
   font-size: var(--font-size-s);
+  font-family: var(--font-family);
   display: flex;
   align-items: center;
   justify-content: center;

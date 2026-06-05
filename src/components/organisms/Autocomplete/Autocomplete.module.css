@@ -52,5 +52,6 @@
 }
 
 .statusError {
-  color: var(--purple-700);
+  color: var(--red-700);
+  font-weight: bold;
 }

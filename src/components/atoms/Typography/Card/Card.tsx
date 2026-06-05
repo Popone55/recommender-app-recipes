@@ -20,7 +20,7 @@ export const Card: FC<{
     <div
       {...a11yProps(!!onClick)}
       onClick={onClick}
-      className={clsx(style.root, className)}>
+      className={clsx(style.root, { [style.clickable]: !!onClick }, className)}>
       {children}
     </div>
   )

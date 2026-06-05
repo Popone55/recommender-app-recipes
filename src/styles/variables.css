@@ -39,6 +39,17 @@
   --purple-800: #53148e;
   --purple-900: #2e0058;
 
+  --red-50: #fef6f9;
+  --red-100: #fce8ef;
+  --red-200: #fad6e2;
+  --red-300: #f7b5cb;
+  --red-400: #ff7aa7;
+  --red-500: #ef6c98;
+  --red-600: #e02564;
+  --red-700: #b0174a;
+  --red-800: #8f143d;
+  --red-900: #57001d;
+
   --font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
 
   --font-size-5xl: 56px;

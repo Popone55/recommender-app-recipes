@@ -13,4 +13,8 @@
     box-shadow: var(--elevation-purple-raised);
     border-color: var(--neutral-400);
   }
+
+  &.clickable {
+    cursor: pointer;
+  }
 }

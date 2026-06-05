@@ -2,7 +2,7 @@ import { LoadingSpinner } from '@components/atoms/LoadingSpinner/LoadingSpinner'
 import { Typography } from '@components/atoms/Typography/Typography'
 import type { useInteractions } from '@floating-ui/react'
 import clsx from 'clsx'
-import type { MutableRefObject } from 'react'
+import type { RefObject } from 'react'
 import style from './Autocomplete.module.css'
 
 type GetItemProps = ReturnType<typeof useInteractions>['getItemProps']
@@ -13,7 +13,7 @@ interface AutocompleteDropdownProps<TOption> {
   options: TOption[]
   listboxId: string
   activeIndex: number | null
-  listRef: MutableRefObject<Array<HTMLElement | null>>
+  listRef: RefObject<Array<HTMLElement | null>>
   getOptionLabel: (option: TOption) => string
   getItemProps: GetItemProps
   onSelect: (option: TOption) => void

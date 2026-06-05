@@ -1,5 +1,5 @@
-import { AutocompleteDropdown } from '@components/molecules/Autocomplete/AutocompleteDropdown'
 import { TextInput } from '@components/molecules/TextInput/TextInput'
+import { AutocompleteDropdown } from '@components/organisms/Autocomplete/AutocompleteDropdown'
 import {
   autoUpdate,
   flip,
@@ -68,9 +68,15 @@ export const Autocomplete = <TData, TOption>({
   const [open, setOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const listRef = useRef<Array<HTMLElement | null>>([])
+
+  const handleOpenChange = useCallback((shouldOpen: boolean) => {
+    setOpen(shouldOpen)
+    if (!shouldOpen) setActiveIndex(null)
+  }, [])
+
   const { refs, floatingStyles, context } = useFloating({
     open,
-    onOpenChange: setOpen,
+    onOpenChange: handleOpenChange,
     whileElementsMounted: autoUpdate,
     middleware: [
       offset(4),
@@ -133,10 +139,9 @@ export const Autocomplete = <TData, TOption>({
     (option: TOption) => {
       onChange(getOptionLabel(option))
       onSelect?.(option)
-      setOpen(false)
-      setActiveIndex(null)
+      handleOpenChange(false)
     },
-    [getOptionLabel, onChange, onSelect]
+    [getOptionLabel, handleOpenChange, onChange, onSelect]
   )
 
   const handleInputKeyDown = useCallback(

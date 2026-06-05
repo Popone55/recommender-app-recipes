@@ -10,33 +10,88 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RecipesSearchRouteRouteImport } from './routes/recipes/search/route'
+import { Route as RecipesSearchResultsRouteImport } from './routes/recipes/search/results'
+import { Route as RecipesSearchBasicPreferencesRouteImport } from './routes/recipes/search/basic-preferences'
+import { Route as RecipesSearchAdvancedPreferencesRouteImport } from './routes/recipes/search/advanced-preferences'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RecipesSearchRouteRoute = RecipesSearchRouteRouteImport.update({
+  id: '/recipes/search',
+  path: '/recipes/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecipesSearchResultsRoute = RecipesSearchResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => RecipesSearchRouteRoute,
+} as any)
+const RecipesSearchBasicPreferencesRoute =
+  RecipesSearchBasicPreferencesRouteImport.update({
+    id: '/basic-preferences',
+    path: '/basic-preferences',
+    getParentRoute: () => RecipesSearchRouteRoute,
+  } as any)
+const RecipesSearchAdvancedPreferencesRoute =
+  RecipesSearchAdvancedPreferencesRouteImport.update({
+    id: '/advanced-preferences',
+    path: '/advanced-preferences',
+    getParentRoute: () => RecipesSearchRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/recipes/search': typeof RecipesSearchRouteRouteWithChildren
+  '/recipes/search/advanced-preferences': typeof RecipesSearchAdvancedPreferencesRoute
+  '/recipes/search/basic-preferences': typeof RecipesSearchBasicPreferencesRoute
+  '/recipes/search/results': typeof RecipesSearchResultsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/recipes/search': typeof RecipesSearchRouteRouteWithChildren
+  '/recipes/search/advanced-preferences': typeof RecipesSearchAdvancedPreferencesRoute
+  '/recipes/search/basic-preferences': typeof RecipesSearchBasicPreferencesRoute
+  '/recipes/search/results': typeof RecipesSearchResultsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/recipes/search': typeof RecipesSearchRouteRouteWithChildren
+  '/recipes/search/advanced-preferences': typeof RecipesSearchAdvancedPreferencesRoute
+  '/recipes/search/basic-preferences': typeof RecipesSearchBasicPreferencesRoute
+  '/recipes/search/results': typeof RecipesSearchResultsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/recipes/search'
+    | '/recipes/search/advanced-preferences'
+    | '/recipes/search/basic-preferences'
+    | '/recipes/search/results'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/recipes/search'
+    | '/recipes/search/advanced-preferences'
+    | '/recipes/search/basic-preferences'
+    | '/recipes/search/results'
+  id:
+    | '__root__'
+    | '/'
+    | '/recipes/search'
+    | '/recipes/search/advanced-preferences'
+    | '/recipes/search/basic-preferences'
+    | '/recipes/search/results'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RecipesSearchRouteRoute: typeof RecipesSearchRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +103,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/recipes/search': {
+      id: '/recipes/search'
+      path: '/recipes/search'
+      fullPath: '/recipes/search'
+      preLoaderRoute: typeof RecipesSearchRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recipes/search/results': {
+      id: '/recipes/search/results'
+      path: '/results'
+      fullPath: '/recipes/search/results'
+      preLoaderRoute: typeof RecipesSearchResultsRouteImport
+      parentRoute: typeof RecipesSearchRouteRoute
+    }
+    '/recipes/search/basic-preferences': {
+      id: '/recipes/search/basic-preferences'
+      path: '/basic-preferences'
+      fullPath: '/recipes/search/basic-preferences'
+      preLoaderRoute: typeof RecipesSearchBasicPreferencesRouteImport
+      parentRoute: typeof RecipesSearchRouteRoute
+    }
+    '/recipes/search/advanced-preferences': {
+      id: '/recipes/search/advanced-preferences'
+      path: '/advanced-preferences'
+      fullPath: '/recipes/search/advanced-preferences'
+      preLoaderRoute: typeof RecipesSearchAdvancedPreferencesRouteImport
+      parentRoute: typeof RecipesSearchRouteRoute
+    }
   }
 }
 
+interface RecipesSearchRouteRouteChildren {
+  RecipesSearchAdvancedPreferencesRoute: typeof RecipesSearchAdvancedPreferencesRoute
+  RecipesSearchBasicPreferencesRoute: typeof RecipesSearchBasicPreferencesRoute
+  RecipesSearchResultsRoute: typeof RecipesSearchResultsRoute
+}
+
+const RecipesSearchRouteRouteChildren: RecipesSearchRouteRouteChildren = {
+  RecipesSearchAdvancedPreferencesRoute: RecipesSearchAdvancedPreferencesRoute,
+  RecipesSearchBasicPreferencesRoute: RecipesSearchBasicPreferencesRoute,
+  RecipesSearchResultsRoute: RecipesSearchResultsRoute,
+}
+
+const RecipesSearchRouteRouteWithChildren =
+  RecipesSearchRouteRoute._addFileChildren(RecipesSearchRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RecipesSearchRouteRoute: RecipesSearchRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
