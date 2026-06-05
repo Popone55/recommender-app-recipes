@@ -1,0 +1,16 @@
+.root {
+  padding: var(--spacing-2xl);
+  background-color: var(--white);
+  backdrop-filter: blur(var(--blur-glass));
+  transition:
+    box-shadow 0.2s var(--animation-easing-smooth),
+    border-color 0.2s var(--animation-easing-smooth);
+  border-radius: var(--spacing-s);
+  border: var(--spacing-hairline) solid var(--neutral-300);
+  box-shadow: var(--elevation-neutral-raised);
+
+  &:hover {
+    box-shadow: var(--elevation-purple-raised);
+    border-color: var(--neutral-400);
+  }
+}

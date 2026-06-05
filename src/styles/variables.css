@@ -17,16 +17,27 @@
   --spacing-10xl: 88px;
   --spacing-11xl: 96px;
 
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --white: #ffffff;
+  --neutral-100: #faf9fa;
+  --neutral-200: #f2f1f3;
+  --neutral-300: #e8e6ea;
+  --neutral-400: #d6d2da;
+  --neutral-500: #bdb7c2;
+  --neutral-600: #766d7f;
+  --neutral-700: #605867;
+  --neutral-800: #49434e;
+  --neutral-900: #1b191d;
+
+  --purple-50: #faf5fe;
+  --purple-100: #f3e9fd;
+  --purple-200: #e9d7fb;
+  --purple-300: #d7b5f7;
+  --purple-400: #bf7bff;
+  --purple-500: #9135e8;
+  --purple-600: #7b1ed2;
+  --purple-700: #6617b2;
+  --purple-800: #53148e;
+  --purple-900: #2e0058;
 
   --font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
 
@@ -40,4 +51,15 @@
   --font-size-s: 16px;
   --font-size-xs: 14px;
   --font-size-2xs: 12px;
+
+  --elevation-neutral-raised:
+    0px 1px 3px 0px color-mix(in srgb, var(--neutral-900) 6%, transparent),
+    0px 1px 2px 0px color-mix(in srgb, var(--neutral-900) 4%, transparent);
+  --elevation-purple-raised:
+    0px 4px 8px 0px color-mix(in srgb, var(--purple-900) 12%, transparent),
+    0px 2px 4px 0px color-mix(in srgb, var(--purple-900) 8%, transparent);
+
+  --animation-easing-smooth: cubic-bezier(0.4, 0, 0.6, 1);
+
+  --blur-glass: 1.6px;
 }
