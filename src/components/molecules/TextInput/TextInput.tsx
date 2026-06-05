@@ -1,21 +1,22 @@
 import { Typography } from '@components/atoms/Typography/Typography'
 import clsx from 'clsx'
-import type { RefObject } from 'react'
-import { useRef, type ChangeEvent, type FC, type KeyboardEvent, type ReactNode } from 'react'
+import type { FC, InputHTMLAttributes, KeyboardEvent, ReactNode, RefObject } from 'react'
 import style from './TextInput.module.css'
 
-interface TextInputProps {
-  placeholder?: string
+interface TextInputProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'onChange' | 'value' | 'onBlur'
+> {
   label?: ReactNode
   value: string | null | undefined
   onChange?: (value: string) => void
   onBlur?: (value: string) => void
   onEnter?: (value: string) => void
-  disabled?: boolean
   inputClassName?: string
   inputWrapperClassName?: string
   fieldsetClassName?: string
   ref?: RefObject<HTMLFieldSetElement | null>
+  inputRef?: RefObject<HTMLInputElement | null>
 }
 
 export const TextInput: FC<TextInputProps> = ({
@@ -29,18 +30,15 @@ export const TextInput: FC<TextInputProps> = ({
   inputClassName,
   inputWrapperClassName,
   fieldsetClassName,
-  ref
+  ref: fieldsetRef,
+  inputRef,
+  ...inputProps
 }) => {
-  const inputRef = useRef<HTMLInputElement | null>(null)
-
-  const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value
-    onChange?.(val)
-  }
-
   const definedValue = value ?? ''
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
+    inputProps.onKeyDown?.(event)
+    if (event.defaultPrevented) return
     if (!onEnter) return
     if (event.key === 'Enter') {
       event.preventDefault()
@@ -50,7 +48,7 @@ export const TextInput: FC<TextInputProps> = ({
 
   return (
     <fieldset
-      ref={ref}
+      ref={fieldsetRef}
       className={clsx(
         style.root,
         {
@@ -68,13 +66,14 @@ export const TextInput: FC<TextInputProps> = ({
         )}
         <div className={clsx(style.inputWrapper, inputWrapperClassName)}>
           <input
+            {...inputProps}
             ref={inputRef}
             className={inputClassName}
             disabled={disabled}
             type="text"
             placeholder={placeholder}
             value={definedValue}
-            onChange={onValueChange}
+            onChange={(e) => onChange?.(e.target.value)}
             onBlur={() => onBlur?.(definedValue)}
             onKeyDown={handleKeyDown}
           />
