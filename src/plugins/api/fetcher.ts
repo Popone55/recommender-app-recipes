@@ -38,5 +38,5 @@ export const fetcher = async <T>(
     return await throwErrorMessageFromResponse(response)
   }
 
-  return response.json()
+  return response.json() as PromiseLike<T>
 }

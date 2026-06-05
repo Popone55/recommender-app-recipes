@@ -6,7 +6,7 @@ export const RecipeItemCardSkeleton = () => {
   return (
     <Card className={style.root}>
       <Skeleton
-        width="140px"
+        width="240px"
         height="24px"
       />
       <div className={style.content}>

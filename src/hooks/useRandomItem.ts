@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
-import { pickRandomIndex } from '../plugins/pickRandomIndex'
+import { pickRandomIndex } from './pickRandomIndex'
 import { useEffectOnceWhen } from './useEffectOnceWhen'
 
-export const useRandomItem = <T>(items: T[] | undefined) => {
+export const useRandomItem = <T>(items: T[] | undefined | null) => {
   const [index, setIndex] = useState<number | null>(null)
 
   const pickAnother = useCallback(() => {

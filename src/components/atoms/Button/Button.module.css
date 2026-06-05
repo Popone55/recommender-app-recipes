@@ -14,7 +14,6 @@
   padding: 0 var(--spacing-l);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(var(--blur-glass));
   transition:
     all var(--animation-duration-normal) var(--animation-easing-ease-out),
     transform var(--animation-duration-fast) var(--animation-easing-ease-out);

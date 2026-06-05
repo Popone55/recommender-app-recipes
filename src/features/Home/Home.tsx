@@ -2,6 +2,7 @@ import { Button } from '@components/atoms/Button/Button'
 import { Card } from '@components/atoms/Typography/Card/Card'
 import { Typography } from '@components/atoms/Typography/Typography'
 import { useNavigate } from '@tanstack/react-router'
+import { History } from '../History/History'
 import style from './Home.module.css'
 
 export const Home = () => {
@@ -14,11 +15,11 @@ export const Home = () => {
         onClick={() => navigate({ to: '/recipes/search/basic-preferences' })}>
         <Typography
           size="5xl"
-          align='center'
+          align="center"
           weight="bold">
           Let's find a recipe!
         </Typography>
-        <Typography align='center'> 
+        <Typography align="center">
           Click the button below to get started. We'll help you find the right recipe for you.
         </Typography>
         <Button
@@ -27,6 +28,7 @@ export const Home = () => {
           Get started
         </Button>
       </Card>
+      <History />
     </div>
   )
 }

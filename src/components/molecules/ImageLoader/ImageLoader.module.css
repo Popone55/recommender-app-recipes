@@ -1,0 +1,19 @@
+.imageWrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+
+  img {
+    border-radius: var(--spacing-xs);
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .imageHidden {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+}

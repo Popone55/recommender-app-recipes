@@ -7,17 +7,23 @@ const { recipes } = REST_API.RECIPES
 
 export const useRecipes = ({
   areaOfInterest,
-  category,
-  ingredient
+  category
 }: {
   areaOfInterest: string
   category: string
-  ingredient: string
 }) => {
   const { data, isLoading, error } = useQuery<RecipesListResponse>({
-    queryKey: recipes.cacheKey(areaOfInterest, category, ingredient),
-    queryFn: () =>
-      fetcher(recipes.path(areaOfInterest, category, ingredient), { method: recipes.method }),
+    queryKey: recipes.cacheKey(areaOfInterest, category),
+    queryFn: async () => {
+      const response = await fetcher<RecipesListResponse>(recipes.path(areaOfInterest, category), {
+        method: recipes.method
+      })
+
+      // Filtering by two criteria at the same time is not possible with the API, so we filter here by the only field returned by the API.
+      return {
+        meals: response?.meals?.filter((meal) => meal.strArea == areaOfInterest) ?? null
+      }
+    },
     staleTime: recipes.staleTime
   })
 

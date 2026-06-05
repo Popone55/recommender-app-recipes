@@ -20,16 +20,11 @@ export const RECIPES = {
     staleTime: Infinity
   },
   recipes: {
-    path: (areaOfInterest: string, category: string, ingredient: string) => {
-      return `/filter.php?a=${areaOfInterest}&c=${category}&i=${ingredient}`
+    path: (areaOfInterest: string, category: string) => {
+      return `/filter.php?a=${areaOfInterest}&c=${category}`
     },
     method: 'GET',
-    cacheKey: (areaOfInterest: string, category: string, ingredient: string) => [
-      'recipes',
-      areaOfInterest,
-      category,
-      ingredient
-    ],
+    cacheKey: (areaOfInterest: string, category: string) => ['recipes', areaOfInterest, category],
     staleTime: Infinity
   }
 } as const satisfies ApiFeature

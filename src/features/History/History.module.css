@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+
+  .feedbackItems {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m);
+    overflow-y: auto;
+    max-height: 500px;
+  }
+}

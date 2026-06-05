@@ -5,7 +5,7 @@ import style from './RecipesSearchLayout.module.css'
 export const RecipesSearchLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <div className={style.root}>
-      <Card>{children}</Card>
+      <Card className={style.card}>{children}</Card>
     </div>
   )
 }

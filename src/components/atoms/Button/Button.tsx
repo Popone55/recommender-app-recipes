@@ -1,5 +1,11 @@
 import clsx from 'clsx'
-import { type ButtonHTMLAttributes, type FC, type MouseEvent, type RefObject } from 'react'
+import {
+  type ButtonHTMLAttributes,
+  type FC,
+  type MouseEvent,
+  type ReactNode,
+  type RefObject
+} from 'react'
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner'
 import style from './Button.module.css'
 
@@ -10,6 +16,7 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onC
   loading?: boolean
   size?: 'small' | 'medium' | 'large'
   ref?: RefObject<HTMLButtonElement>
+  startIcon?: ReactNode
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -23,6 +30,7 @@ export const Button: FC<ButtonProps> = ({
   disabled,
   'aria-label': ariaLabel,
   ref,
+  startIcon,
   ...rest
 }) => {
   const isDisabled = disabled || loading
@@ -48,6 +56,7 @@ export const Button: FC<ButtonProps> = ({
         className
       )}>
       {loading && <LoadingSpinner size="xsmall" />}
+      {startIcon}
       {children}
     </button>
   )

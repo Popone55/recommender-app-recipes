@@ -1,7 +1,6 @@
 .root {
   padding: var(--spacing-2xl);
   background-color: var(--white);
-  backdrop-filter: blur(var(--blur-glass));
   transition:
     box-shadow 0.2s var(--animation-easing-smooth),
     border-color 0.2s var(--animation-easing-smooth);

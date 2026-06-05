@@ -16,14 +16,16 @@ export const PillButton: FC<PillButtonProps> = ({
   disabled,
   ...props
 }) => {
+  const Component = onClick ? 'button' : 'span'
+
   return (
-    <button
+    <Component
       disabled={disabled}
       className={clsx(style.root, { [style.clickable]: !!onClick, [style.disabled]: disabled })}
       onClick={onClick}
       {...props}>
       {children}
       {suffix}
-    </button>
+    </Component>
   )
 }

@@ -1,7 +1,7 @@
 import { logger } from './logger'
 
 export const LocalStorageKey = {
-  RECIPES: 'recipes'
+  FEEDBACK_ITEMS: 'feedback-items'
 } as const
 
 type LocalStorageKey = (typeof LocalStorageKey)[keyof typeof LocalStorageKey]

@@ -162,8 +162,8 @@ export const Autocomplete = <TData, TOption>({
       referenceProps.onKeyDown?.(event)
       if (event.defaultPrevented) return
 
-      if (event.key === 'Enter' && activeIndex !== null) {
-        const option = filteredOptions[activeIndex]
+      if (event.key === 'Enter') {
+        const option = activeIndex ? filteredOptions[activeIndex] : filteredOptions[0]
         if (option) {
           event.preventDefault()
           handleSelect(option)

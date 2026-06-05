@@ -32,7 +32,11 @@ export const BasicPreferences = () => {
         </Typography>
       }
       descriptionEl={
-        <Typography>We'll use this to find recipes that match your interests.</Typography>
+        <Typography>
+          We'll use this to find recipes that match your interests.
+          <br />
+          <b>Tip: filter by Italian + Pasta to get the best results.</b>
+        </Typography>
       }
       selectionEl={
         !!areaOfInterest && (

@@ -8,16 +8,12 @@ import { useCallback } from 'react'
 import { useRecipesSearch } from '../context/useRecipesSearch'
 import { SearchSection } from '../SearchSection/SearchSection'
 import { CategoryAutocomplete } from './CategoryAutocomplete/CategoryAutocomplete'
-import { IngredientAutocomplete } from './IngredientAutocomplete/IngredientAutocomplete'
 
 export const AdvancedPreferences = () => {
   const {
     category,
     setCategory,
     setCategoryValue,
-    ingredient,
-    setIngredient,
-    setIngredientValue,
     canContinueToResults,
     canContinueToAdvancedPreferences
   } = useRecipesSearch()
@@ -27,11 +23,6 @@ export const AdvancedPreferences = () => {
     setCategory(null)
     setCategoryValue(null)
   }, [setCategory, setCategoryValue])
-
-  const onClearIngredient = useCallback(() => {
-    setIngredient(null)
-    setIngredientValue(null)
-  }, [setIngredient, setIngredientValue])
 
   const backToBasicPreferences = useCallback(() => {
     navigate({ to: '/recipes/search/basic-preferences' })
@@ -54,23 +45,12 @@ export const AdvancedPreferences = () => {
         <Typography>We'll use this to find recipes that match your interests.</Typography>
       }
       selectionEl={
-        (category || ingredient) && (
-          <>
-            {!!category && (
-              <PillButton
-                onClick={onClearCategory}
-                suffix={<X size={16} />}>
-                {category}
-              </PillButton>
-            )}
-            {!!ingredient && (
-              <PillButton
-                onClick={onClearIngredient}
-                suffix={<X size={16} />}>
-                {ingredient}
-              </PillButton>
-            )}
-          </>
+        !!category && (
+          <PillButton
+            onClick={onClearCategory}
+            suffix={<X size={16} />}>
+            {category}
+          </PillButton>
         )
       }
       actionsEl={
@@ -92,7 +72,6 @@ export const AdvancedPreferences = () => {
         </>
       }>
       <CategoryAutocomplete />
-      <IngredientAutocomplete />
     </SearchSection>
   )
 }

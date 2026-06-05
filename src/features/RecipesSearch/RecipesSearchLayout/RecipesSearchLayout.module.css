@@ -1,8 +1,13 @@
 .root {
   height: 100%;
-  width: 100%;
+  width: min(100%, 600px);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin: 0 auto;
+
+  .card {
+    width: 100%;
+  }
 }

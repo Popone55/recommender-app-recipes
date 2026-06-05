@@ -1,22 +1,44 @@
-import { useMemo, useState, type FC, type ReactNode } from 'react'
+import type { FeedbackItem, RecipeItem } from '@plugins/api/interfaces/recipes'
+import { getLocalStorageValue, LocalStorageKey, setLocalStorageValue } from '@plugins/localStorage'
+import { useCallback, useMemo, useState, type FC, type ReactNode } from 'react'
 import { RecipesSearchContext } from './RecipesSearchContext'
 
 export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [areaOfInterest, setAreaOfInterest] = useState<string | null>(null)
   const [category, setCategory] = useState<string | null>(null)
-  const [ingredient, setIngredient] = useState<string | null>(null)
 
   const [areaOfInterestValue, setAreaOfInterestValue] = useState<string | null>(null)
   const [categoryValue, setCategoryValue] = useState<string | null>(null)
-  const [ingredientValue, setIngredientValue] = useState<string | null>(null)
 
   const canContinueToAdvancedPreferences = useMemo(() => {
     return !!areaOfInterest
   }, [areaOfInterest])
 
   const canContinueToResults = useMemo(() => {
-    return canContinueToAdvancedPreferences && !!category && !!ingredient
-  }, [canContinueToAdvancedPreferences, category, ingredient])
+    return canContinueToAdvancedPreferences && !!category
+  }, [canContinueToAdvancedPreferences, category])
+
+  const saveFeedback = useCallback(
+    (recipe: RecipeItem, feedback: 'like' | 'dislike') => {
+      if (!areaOfInterest || !category) return
+
+      const feedbackItem = {
+        id: recipe.idMeal,
+        title: recipe.strMeal,
+        image: recipe.strMealThumb,
+        feedback,
+        inputs: {
+          areaOfInterest,
+          category
+        },
+        createdAt: Date.now()
+      } satisfies FeedbackItem
+
+      const feedbackItems = getLocalStorageValue<FeedbackItem[]>(LocalStorageKey.FEEDBACK_ITEMS)
+      setLocalStorageValue(LocalStorageKey.FEEDBACK_ITEMS, [...(feedbackItems ?? []), feedbackItem])
+    },
+    [areaOfInterest, category]
+  )
 
   const contextValue = useMemo(
     () => ({
@@ -26,24 +48,20 @@ export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children })
       canContinueToResults,
       category,
       setCategory,
-      ingredient,
-      setIngredient,
       areaOfInterestValue,
       setAreaOfInterestValue,
       categoryValue,
       setCategoryValue,
-      ingredientValue,
-      setIngredientValue
+      saveFeedback
     }),
     [
       areaOfInterest,
       canContinueToAdvancedPreferences,
       canContinueToResults,
       category,
-      ingredient,
       areaOfInterestValue,
       categoryValue,
-      ingredientValue
+      saveFeedback
     ]
   )
 
