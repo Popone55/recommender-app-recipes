@@ -1,6 +1,7 @@
 import { Button } from '@components/atoms/Button/Button'
 import { PillButton } from '@components/atoms/PillButton/PillButton'
 import { Typography } from '@components/atoms/Typography/Typography'
+import { useEffectOnceWhen } from '@hooks/useEffectOnceWhen'
 import { useNavigate } from '@tanstack/react-router'
 import { X } from 'lucide-react'
 import { useCallback } from 'react'
@@ -17,7 +18,8 @@ export const AdvancedPreferences = () => {
     ingredient,
     setIngredient,
     setIngredientValue,
-    canContinueToResults
+    canContinueToResults,
+    canContinueToAdvancedPreferences
   } = useRecipesSearch()
   const navigate = useNavigate()
 
@@ -30,6 +32,16 @@ export const AdvancedPreferences = () => {
     setIngredient(null)
     setIngredientValue(null)
   }, [setIngredient, setIngredientValue])
+
+  const backToBasicPreferences = useCallback(() => {
+    navigate({ to: '/recipes/search/basic-preferences' })
+  }, [navigate])
+
+  useEffectOnceWhen(() => {
+    if (!canContinueToAdvancedPreferences) {
+      backToBasicPreferences()
+    }
+  })
 
   return (
     <SearchSection
@@ -65,7 +77,7 @@ export const AdvancedPreferences = () => {
           <Button
             variant="neutral"
             size="medium"
-            onClick={() => navigate({ to: '/recipes/search/basic-preferences' })}>
+            onClick={backToBasicPreferences}>
             Back
           </Button>
           {canContinueToResults && (

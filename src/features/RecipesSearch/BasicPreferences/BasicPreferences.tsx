@@ -13,7 +13,7 @@ export const BasicPreferences = () => {
     areaOfInterest,
     setAreaOfInterest,
     setAreaOfInterestValue,
-    canContinueToAdvancedPreferences
+    canContinueToAdvancedPreferences,
   } = useRecipesSearch()
   const navigate = useNavigate()
 
