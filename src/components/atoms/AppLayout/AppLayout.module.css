@@ -5,8 +5,7 @@
 
   .content {
     height: 100%;
-    width: min(100%, 1200px);
-    padding: var(--spacing-4xl);
+    width: 100%;
     margin: 0 auto;
   }
 }

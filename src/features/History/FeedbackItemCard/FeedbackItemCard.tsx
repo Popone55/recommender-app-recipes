@@ -2,7 +2,7 @@ import { PillButton } from '@components/atoms/PillButton/PillButton'
 import { Card } from '@components/atoms/Typography/Card/Card'
 import { Typography } from '@components/atoms/Typography/Typography'
 import { ImageLoader } from '@components/molecules/ImageLoader/ImageLoader'
-import type { FeedbackItem } from '@plugins/api/interfaces/recipes'
+import type { FeedbackItem } from '@features/History/context/HistoryContext'
 import { ThumbsDown, ThumbsUp } from 'lucide-react'
 import { type FC } from 'react'
 import style from './FeedbackItemCard.module.css'
@@ -26,7 +26,7 @@ export const FeedbackItemCard: FC<{
         <ImageLoader
           src={feedbackItem.image}
           alt={feedbackItem.title}
-          size={150}
+          size={100}
         />
         <div className={style.info}>
           <div className={style.infoTags}>

@@ -39,14 +39,6 @@ export type RecipesListResponse = {
   meals: RecipeItem[] | null
 }
 
-export interface FeedbackItem {
-  id: string
-  title: string
-  image: string
-  feedback: 'like' | 'dislike'
-  inputs: {
-    areaOfInterest: string
-    category: string
-  }
-  createdAt: number
+export type SearchRecipesListResponse = {
+  meals: RecipeItem[] | null
 }

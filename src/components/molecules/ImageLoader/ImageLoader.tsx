@@ -6,7 +6,9 @@ export const ImageLoader: FC<{ src: string; alt: string; size: number }> = ({ sr
   const [isLoaded, setIsLoaded] = useState(false)
 
   return (
-    <div className={style.imageWrapper}>
+    <div
+      className={style.imageWrapper}
+      style={{ width: size, height: size }}>
       {!isLoaded && (
         <Skeleton
           width={size}
@@ -17,6 +19,7 @@ export const ImageLoader: FC<{ src: string; alt: string; size: number }> = ({ sr
         src={src}
         alt={alt}
         title={alt}
+        style={{ width: size, height: size }}
         className={!isLoaded ? style.imageHidden : undefined}
         onLoad={() => setIsLoaded(true)}
       />

@@ -1,11 +1,13 @@
-import type { FeedbackItem, RecipeItem } from '@plugins/api/interfaces/recipes'
-import { getLocalStorageValue, LocalStorageKey, setLocalStorageValue } from '@plugins/localStorage'
+import type { FeedbackItem } from '@features/History/context/HistoryContext'
+import { useHistoryContext } from '@features/History/context/useHistoryContext'
+import type { RecipeItem } from '@plugins/api/interfaces/recipes'
 import { useCallback, useMemo, useState, type FC, type ReactNode } from 'react'
 import { RecipesSearchContext } from './RecipesSearchContext'
 
 export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [areaOfInterest, setAreaOfInterest] = useState<string | null>(null)
   const [category, setCategory] = useState<string | null>(null)
+  const { pushFeedbackItem } = useHistoryContext()
 
   const [areaOfInterestValue, setAreaOfInterestValue] = useState<string | null>(null)
   const [categoryValue, setCategoryValue] = useState<string | null>(null)
@@ -34,10 +36,9 @@ export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children })
         createdAt: Date.now()
       } satisfies FeedbackItem
 
-      const feedbackItems = getLocalStorageValue<FeedbackItem[]>(LocalStorageKey.FEEDBACK_ITEMS)
-      setLocalStorageValue(LocalStorageKey.FEEDBACK_ITEMS, [...(feedbackItems ?? []), feedbackItem])
+      pushFeedbackItem(feedbackItem)
     },
-    [areaOfInterest, category]
+    [areaOfInterest, category, pushFeedbackItem]
   )
 
   const contextValue = useMemo(
