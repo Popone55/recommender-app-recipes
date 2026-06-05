@@ -17,6 +17,7 @@ interface TextInputProps extends Omit<
   fieldsetClassName?: string
   ref?: RefObject<HTMLFieldSetElement | null>
   inputRef?: RefObject<HTMLInputElement | null>
+  suffix?: ReactNode
 }
 
 export const TextInput: FC<TextInputProps> = ({
@@ -32,6 +33,7 @@ export const TextInput: FC<TextInputProps> = ({
   fieldsetClassName,
   ref: fieldsetRef,
   inputRef,
+  suffix,
   ...inputProps
 }) => {
   const definedValue = value ?? ''
@@ -77,6 +79,7 @@ export const TextInput: FC<TextInputProps> = ({
             onBlur={() => onBlur?.(definedValue)}
             onKeyDown={handleKeyDown}
           />
+          {suffix}
         </div>
       </label>
     </fieldset>

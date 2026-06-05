@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-s);
+  border: 0;
+  border-radius: var(--spacing-xs);
+  padding: var(--spacing-s) var(--spacing-m);
+  background-color: var(--purple-100);
+  color: var(--neutral-900);
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--animation-duration-fast) var(--animation-easing-out-quad);
+
+  &:hover {
+    background-color: var(--purple-200);
+  }
+
+  &:focus-visible {
+    outline: var(--spacing-2xs) solid var(--purple-500);
+    outline-offset: var(--spacing-2xs);
+  }
+
+  &:disabled {
+    background-color: var(--purple-50);
+    color: var(--neutral-500);
+    cursor: not-allowed;
+  }
+}

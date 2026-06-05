@@ -14,6 +14,7 @@ import {
   useRole
 } from '@floating-ui/react'
 import clsx from 'clsx'
+import { X } from 'lucide-react'
 import {
   useCallback,
   useId,
@@ -144,6 +145,12 @@ export const Autocomplete = <TData, TOption>({
     [getOptionLabel, handleOpenChange, onChange, onSelect]
   )
 
+  const handleClear = useCallback(() => {
+    onChange('')
+    setActiveIndex(null)
+    setOpen(true)
+  }, [onChange])
+
   const handleInputKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
       referenceProps.onKeyDown?.(event)
@@ -183,6 +190,19 @@ export const Autocomplete = <TData, TOption>({
         onKeyDown={handleInputKeyDown}
         onFocus={referenceProps.onFocus}
         onPointerDown={referenceProps.onPointerDown}
+        suffix={
+          value.length > 0 &&
+          !disabled && (
+            <button
+              type="button"
+              className={style.clearButton}
+              aria-label="Clear search"
+              onPointerDown={(event) => event.preventDefault()}
+              onClick={handleClear}>
+              <X size={16} />
+            </button>
+          )
+        }
       />
 
       {showDropdown && (

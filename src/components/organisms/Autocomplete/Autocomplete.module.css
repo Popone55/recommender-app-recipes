@@ -55,3 +55,30 @@
   color: var(--red-700);
   font-weight: bold;
 }
+
+.clearButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 0;
+  padding: var(--spacing-2xs);
+  color: var(--neutral-600);
+  background-color: transparent;
+  cursor: pointer;
+  transition:
+    color var(--animation-duration-fast) var(--animation-easing-out-quad),
+    border-color var(--animation-duration-fast) var(--animation-easing-out-quad);
+  border-radius: 100%;
+  border: var(--spacing-hairline) solid var(--neutral-300);
+
+  &:hover {
+    color: var(--neutral-900);
+    border-color: var(--neutral-400);
+  }
+
+  &:focus-visible {
+    outline: var(--spacing-2xs) solid var(--neutral-400);
+    outline-offset: var(--spacing-2xs);
+  }
+}
