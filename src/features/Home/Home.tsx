@@ -1,6 +1,7 @@
 import { Button } from '@components/atoms/Button/Button'
 import { Card } from '@components/atoms/Typography/Card/Card'
 import { Typography } from '@components/atoms/Typography/Typography'
+import { SearchByTerm } from '@features/SearchByTerm/SearchByTerm'
 import { useNavigate } from '@tanstack/react-router'
 import { History } from '../History/History'
 import style from './Home.module.css'
@@ -29,7 +30,8 @@ export const Home = () => {
             Get started
           </Button>
         </Card>
-        <History />
+        <History className={style.history} />
+        <SearchByTerm className={style.searchByTerm} />
       </div>
     </div>
   )

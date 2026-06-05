@@ -6,15 +6,20 @@
   gap: var(--spacing-m);
   background-color: var(--neutral-100);
   padding: var(--spacing-2xl);
+  container-type: inline-size;
+  container-name: home;
 
   .cards {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--spacing-xl);
+
+    @container home (width < 600px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .card {
-    grid-column: span 2;
     display: flex;
     flex-direction: column;
     align-items: center;
