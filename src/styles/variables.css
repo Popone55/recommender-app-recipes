@@ -60,6 +60,7 @@
     0px 2px 4px 0px color-mix(in srgb, var(--purple-900) 8%, transparent);
 
   --animation-easing-smooth: cubic-bezier(0.4, 0, 0.6, 1);
+  --animation-easing-out-quad: cubic-bezier(0.5, 1, 0.89, 1);
 
   --blur-glass: 1.6px;
 }
