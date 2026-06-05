@@ -34,5 +34,13 @@ export const RECIPES = {
     method: 'GET',
     cacheKey: (query: string) => ['searchRecipes', query],
     staleTime: Infinity
+  },
+  recipeDetails: {
+    path: (id: string) => {
+      return `/lookup.php?i=${id}`
+    },
+    method: 'GET',
+    cacheKey: (id: string) => ['recipeDetails', id],
+    staleTime: Infinity
   }
 } as const satisfies ApiFeature

@@ -9,7 +9,6 @@
   flex-direction: column;
   gap: var(--spacing-m);
   overflow-y: auto;
-  max-height: 600px;
 }
 
 .resultItem {

@@ -30,8 +30,8 @@ export const Home = () => {
             Get started
           </Button>
         </Card>
-        <History className={style.history} />
         <SearchByTerm className={style.searchByTerm} />
+        <History className={style.history} />
       </div>
     </div>
   )

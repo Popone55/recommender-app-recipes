@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RecipesIdRouteImport } from './routes/recipes/$id'
 import { Route as RecipesSearchRouteRouteImport } from './routes/recipes/search/route'
 import { Route as RecipesSearchResultsRouteImport } from './routes/recipes/search/results'
 import { Route as RecipesSearchBasicPreferencesRouteImport } from './routes/recipes/search/basic-preferences'
@@ -18,6 +19,11 @@ import { Route as RecipesSearchAdvancedPreferencesRouteImport } from './routes/r
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecipesIdRoute = RecipesIdRouteImport.update({
+  id: '/recipes/$id',
+  path: '/recipes/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecipesSearchRouteRoute = RecipesSearchRouteRouteImport.update({
@@ -46,6 +52,7 @@ const RecipesSearchAdvancedPreferencesRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/recipes/search': typeof RecipesSearchRouteRouteWithChildren
+  '/recipes/$id': typeof RecipesIdRoute
   '/recipes/search/advanced-preferences': typeof RecipesSearchAdvancedPreferencesRoute
   '/recipes/search/basic-preferences': typeof RecipesSearchBasicPreferencesRoute
   '/recipes/search/results': typeof RecipesSearchResultsRoute
@@ -53,6 +60,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/recipes/search': typeof RecipesSearchRouteRouteWithChildren
+  '/recipes/$id': typeof RecipesIdRoute
   '/recipes/search/advanced-preferences': typeof RecipesSearchAdvancedPreferencesRoute
   '/recipes/search/basic-preferences': typeof RecipesSearchBasicPreferencesRoute
   '/recipes/search/results': typeof RecipesSearchResultsRoute
@@ -61,6 +69,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/recipes/search': typeof RecipesSearchRouteRouteWithChildren
+  '/recipes/$id': typeof RecipesIdRoute
   '/recipes/search/advanced-preferences': typeof RecipesSearchAdvancedPreferencesRoute
   '/recipes/search/basic-preferences': typeof RecipesSearchBasicPreferencesRoute
   '/recipes/search/results': typeof RecipesSearchResultsRoute
@@ -70,6 +79,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/recipes/search'
+    | '/recipes/$id'
     | '/recipes/search/advanced-preferences'
     | '/recipes/search/basic-preferences'
     | '/recipes/search/results'
@@ -77,6 +87,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/recipes/search'
+    | '/recipes/$id'
     | '/recipes/search/advanced-preferences'
     | '/recipes/search/basic-preferences'
     | '/recipes/search/results'
@@ -84,6 +95,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/recipes/search'
+    | '/recipes/$id'
     | '/recipes/search/advanced-preferences'
     | '/recipes/search/basic-preferences'
     | '/recipes/search/results'
@@ -92,6 +104,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   RecipesSearchRouteRoute: typeof RecipesSearchRouteRouteWithChildren
+  RecipesIdRoute: typeof RecipesIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -101,6 +114,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recipes/$id': {
+      id: '/recipes/$id'
+      path: '/recipes/$id'
+      fullPath: '/recipes/$id'
+      preLoaderRoute: typeof RecipesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/recipes/search': {
@@ -152,6 +172,7 @@ const RecipesSearchRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   RecipesSearchRouteRoute: RecipesSearchRouteRouteWithChildren,
+  RecipesIdRoute: RecipesIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

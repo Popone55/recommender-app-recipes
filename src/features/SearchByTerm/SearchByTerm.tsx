@@ -33,7 +33,7 @@ export const SearchByTerm: FC<{ className?: string }> = ({ className }) => {
       <Typography
         size="l"
         weight="bold">
-        Search your recipes
+        Search recipes from DB
       </Typography>
       <TextInput
         label="Search by term"
@@ -70,7 +70,8 @@ export const SearchByTerm: FC<{ className?: string }> = ({ className }) => {
         {data?.meals?.map((meal) => (
           <Link
             key={meal.idMeal}
-            to={`/recipes/search/results/${meal.idMeal}`}
+            to="/recipes/$id"
+            params={{ id: meal.idMeal }}
             className={style.resultItemLink}>
             <Card className={style.resultItem}>
               <ImageLoader
