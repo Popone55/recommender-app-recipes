@@ -1,0 +1,95 @@
+@import '@aptus-platform/components/styles/animations';
+
+.root {
+  &.regular {
+    font-weight: regular;
+  }
+
+  &.medium {
+    font-weight: medium;
+  }
+
+  &.bold {
+    font-weight: bold;
+  }
+
+  &.left {
+    text-align: left;
+  }
+
+  &.center {
+    text-align: center;
+  }
+
+  &.right {
+    text-align: right;
+  }
+
+  &.\32 xs {
+    font-size: var(--font-size-2xs);
+  }
+
+  &.xs {
+    font-size: var(--font-size-xs);
+  }
+
+  &.s {
+    font-size: var(--font-size-s);
+  }
+
+  &.m {
+    font-size: var(--font-size-m);
+  }
+
+  &.l {
+    font-size: var(--font-size-l);
+  }
+
+  &.xl {
+    font-size: var(--font-size-xl);
+  }
+
+  &.\32 xl {
+    font-size: var(--font-size-2xl);
+  }
+
+  &.\33 xl {
+    font-size: var(--font-size-3xl);
+  }
+
+  &.\34 xl {
+    font-size: var(--font-size-4xl);
+  }
+
+  &.\35 xl {
+    font-size: var(--font-size-5xl);
+  }
+
+  &.shimmer {
+    &.shimmerPrimary {
+      /* TODO: manual semantic review — shimmer gradient needs light-dark() color stops */
+      --shimmer-color-1: var(--brand-logo);
+      --shimmer-color-2: var(--purple-500);
+      --shimmer-color-3: var(--brand-logo);
+    }
+
+    &.shimmerGray {
+      /* TODO: manual semantic review — shimmer gradient needs light-dark() color stops */
+      --shimmer-color-1: var(--neutral-600);
+      --shimmer-color-2: var(--neutral-200);
+      --shimmer-color-3: var(--neutral-600);
+    }
+
+    background: linear-gradient(
+      -45deg,
+      var(--shimmer-color-1) 25%,
+      var(--shimmer-color-2) 50%,
+      var(--shimmer-color-3) 75%
+    );
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 200% 100%;
+    animation: shimmer-text var(--animation-duration-slowest) infinite linear;
+  }
+}
