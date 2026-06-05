@@ -15,15 +15,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@features/*": ["./src/features/*"],
-      "@stores/*": ["./src/stores/*"],
       "@plugins/*": ["./src/plugins/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@dictionaries/*": ["./src/dictionaries/*"],
       "@tests/*": ["./src/tests/*"],
-      "@i18n/*": ["./src/i18n/*"]
     },
     /* Linting */
     "noUnusedLocals": true,

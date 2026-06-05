@@ -8,7 +8,6 @@ export default defineConfig({
   plugins: [tanstackRouter({ autoCodeSplitting: true }), react()],
   resolve: {
     alias: {
-      '@assets': path.resolve(__dirname, './src/assets'),
       '@components': path.resolve(__dirname, './src/components'),
       '@features': path.resolve(__dirname, './src/features'),
       '@plugins': path.resolve(__dirname, './src/plugins'),
