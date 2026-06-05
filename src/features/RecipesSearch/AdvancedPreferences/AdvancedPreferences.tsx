@@ -38,10 +38,8 @@ export const AdvancedPreferences = () => {
   }, [navigate])
 
   useEffectOnceWhen(() => {
-    if (!canContinueToAdvancedPreferences) {
-      backToBasicPreferences()
-    }
-  })
+    backToBasicPreferences()
+  }, !canContinueToAdvancedPreferences)
 
   return (
     <SearchSection
@@ -51,6 +49,9 @@ export const AdvancedPreferences = () => {
           weight="bold">
           Let's define your advanced preferences
         </Typography>
+      }
+      descriptionEl={
+        <Typography>We'll use this to find recipes that match your interests.</Typography>
       }
       selectionEl={
         (category || ingredient) && (

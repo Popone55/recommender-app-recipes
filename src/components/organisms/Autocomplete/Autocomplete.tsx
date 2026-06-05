@@ -71,8 +71,8 @@ export const Autocomplete = <TData, TOption>({
   const listRef = useRef<Array<HTMLElement | null>>([])
 
   const handleOpenChange = useCallback((shouldOpen: boolean) => {
-    setOpen(shouldOpen)
     if (!shouldOpen) setActiveIndex(null)
+    setOpen(shouldOpen)
   }, [])
 
   const { refs, floatingStyles, context } = useFloating({
@@ -115,6 +115,7 @@ export const Autocomplete = <TData, TOption>({
     activeIndex,
     onNavigate: setActiveIndex,
     loop: true,
+    virtual: true,
     enabled: open && filteredOptions.length > 0
   })
 

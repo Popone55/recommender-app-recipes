@@ -1,4 +1,4 @@
-import { useMemo, useState, type FC, type ReactNode } from 'react'
+import { useCallback, useMemo, useState, type FC, type ReactNode } from 'react'
 import { RecipesSearchContext } from './RecipesSearchContext'
 
 export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
@@ -18,6 +18,13 @@ export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children })
     return canContinueToAdvancedPreferences && !!category && !!ingredient
   }, [canContinueToAdvancedPreferences, category, ingredient])
 
+  const resetAdvancedPreferences = useCallback(() => {
+    setCategory(null)
+    setCategoryValue(null)
+    setIngredient(null)
+    setIngredientValue(null)
+  }, [])
+
   const contextValue = useMemo(
     () => ({
       areaOfInterest,
@@ -33,7 +40,8 @@ export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children })
       categoryValue,
       setCategoryValue,
       ingredientValue,
-      setIngredientValue
+      setIngredientValue,
+      resetAdvancedPreferences
     }),
     [
       areaOfInterest,
@@ -43,7 +51,8 @@ export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children })
       ingredient,
       areaOfInterestValue,
       categoryValue,
-      ingredientValue
+      ingredientValue,
+      resetAdvancedPreferences
     ]
   )
 

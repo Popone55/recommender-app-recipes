@@ -1,0 +1,53 @@
+.root {
+  display: grid;
+  background-color: var(--neutral-200);
+  border-radius: var(--spacing-xs);
+  overflow: hidden;
+
+  .content {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .shimmer,
+  .content {
+    grid-area: 1 / 1;
+    pointer-events: none;
+  }
+
+  .shimmer {
+    transition: all var(--animation-easing-smooth) 0.2s;
+    position: relative;
+    background-color: var(--neutral-300);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -150%;
+      background: linear-gradient(-45deg, transparent 35%, var(--neutral-200) 50%, transparent 65%);
+      border-radius: 100%;
+      animation:
+        shimmer 1.5s infinite linear,
+        shimmer-opacity 1.5s infinite linear;
+    }
+  }
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes shimmer-opacity {
+  from,
+  to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}

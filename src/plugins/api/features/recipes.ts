@@ -1,12 +1,6 @@
 import type { ApiFeature } from '../interfaces/api'
 
 export const RECIPES = {
-  mealCategories: {
-    path: '/categories',
-    method: 'GET',
-    cacheKey: ['mealCategories'],
-    staleTime: Infinity
-  },
   categories: {
     path: '/list.php?c=list',
     method: 'GET',
@@ -23,6 +17,19 @@ export const RECIPES = {
     path: '/list.php?i=list',
     method: 'GET',
     cacheKey: ['ingredients'],
+    staleTime: Infinity
+  },
+  recipes: {
+    path: (areaOfInterest: string, category: string, ingredient: string) => {
+      return `/filter.php?a=${areaOfInterest}&c=${category}&i=${ingredient}`
+    },
+    method: 'GET',
+    cacheKey: (areaOfInterest: string, category: string, ingredient: string) => [
+      'recipes',
+      areaOfInterest,
+      category,
+      ingredient
+    ],
     staleTime: Infinity
   }
 } as const satisfies ApiFeature

@@ -1,16 +1,17 @@
-import { Typography } from '@components/atoms/Typography/Typography'
 import type { FC, ReactNode } from 'react'
 import style from './SearchSection.module.css'
 
 interface SearchSectionProps {
   titleEl: ReactNode
-  selectionEl: ReactNode
+  descriptionEl: ReactNode
+  selectionEl?: ReactNode
   children: ReactNode
   actionsEl: ReactNode
 }
 
 export const SearchSection: FC<SearchSectionProps> = ({
   titleEl,
+  descriptionEl,
   selectionEl,
   children,
   actionsEl
@@ -19,7 +20,7 @@ export const SearchSection: FC<SearchSectionProps> = ({
     <div className={style.root}>
       <div className={style.heading}>
         {titleEl}
-        <Typography>We'll use this to find recipes that match your interests.</Typography>
+        {descriptionEl}
       </div>
       {!!selectionEl && <div className={style.selection}>{selectionEl}</div>}
       <div className={style.content}>{children}</div>

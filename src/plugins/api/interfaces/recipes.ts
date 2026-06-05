@@ -1,10 +1,3 @@
-export interface MealCategory {
-  idCategory: string
-  strCategory: string
-  strCategoryThumb: string
-  strCategoryDescription: string
-}
-
 export interface Category {
   strCategory: string
 }
@@ -22,12 +15,16 @@ export interface Ingredient {
   strThumb: string
 }
 
-export type MealCategoryListResponse = {
-  categories: MealCategory[]
+export interface RecipeItem {
+  idMeal: string
+  strMeal: string
+  strMealThumb: string
+  strArea: string
+  strCountry: string
 }
 
 export type CategoriesListResponse = {
-  meals: MealCategory[]
+  meals: Category[]
 }
 
 export type AreasListResponse = {
@@ -36,4 +33,8 @@ export type AreasListResponse = {
 
 export type IngredientsListResponse = {
   meals: Ingredient[]
+}
+
+export type RecipesListResponse = {
+  meals: RecipeItem[]
 }
