@@ -1,7 +1,7 @@
 import tanstackRouter from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -15,5 +15,10 @@ export default defineConfig({
       '@dictionaries': path.resolve(__dirname, './src/dictionaries'),
       '@tests': path.resolve(__dirname, './src/tests')
     }
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/tests/setup.ts'],
+    css: true
   }
 })

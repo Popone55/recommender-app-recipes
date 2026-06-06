@@ -34,7 +34,7 @@ export interface AutocompleteQueryResult<TData> {
   error: unknown
 }
 
-interface AutocompleteProps<TData, TOption> {
+export interface AutocompleteProps<TData, TOption> {
   label?: ReactNode
   placeholder?: string
   value: string
