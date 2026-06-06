@@ -7,7 +7,7 @@ import { RecipesSearchContext } from './RecipesSearchContext'
 export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [areaOfInterest, setAreaOfInterest] = useState<string | null>(null)
   const [category, setCategory] = useState<string | null>(null)
-  const { pushFeedbackItem } = useHistoryContext()
+  const { addFeedbackItem } = useHistoryContext()
 
   const [areaOfInterestValue, setAreaOfInterestValue] = useState<string | null>(null)
   const [categoryValue, setCategoryValue] = useState<string | null>(null)
@@ -36,9 +36,9 @@ export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children })
         createdAt: Date.now()
       } satisfies FeedbackItem
 
-      pushFeedbackItem(feedbackItem)
+      addFeedbackItem(feedbackItem)
     },
-    [areaOfInterest, category, pushFeedbackItem]
+    [areaOfInterest, category, addFeedbackItem]
   )
 
   const contextValue = useMemo(

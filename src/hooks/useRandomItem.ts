@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import { pickRandomIndex } from './pickRandomIndex'
+import { pickRandomIndex } from '../plugins/utils/pickRandomIndex'
 import { useEffectOnceWhen } from './useEffectOnceWhen'
 
 export const useRandomItem = <T>(items: T[] | undefined | null) => {

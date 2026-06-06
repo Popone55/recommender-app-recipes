@@ -14,7 +14,7 @@ export interface FeedbackItem {
 
 export interface HistoryContextValue {
   feedbackItems: FeedbackItem[] | null
-  pushFeedbackItem: (feedbackItem: FeedbackItem) => void
+  addFeedbackItem: (feedbackItem: FeedbackItem) => void
 }
 
 export const HistoryContext = createContext<HistoryContextValue>(

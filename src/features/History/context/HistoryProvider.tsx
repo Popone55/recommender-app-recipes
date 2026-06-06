@@ -7,7 +7,7 @@ export const HistoryProvider: FC<{ children: ReactNode }> = ({ children }) => {
     LocalStorageKey.FEEDBACK_ITEMS
   )
 
-  const pushFeedbackItem = useCallback(
+  const addFeedbackItem = useCallback(
     (feedbackItem: FeedbackItem) => {
       setFeedbackItems([feedbackItem, ...(feedbackItems ?? [])])
     },
@@ -15,8 +15,8 @@ export const HistoryProvider: FC<{ children: ReactNode }> = ({ children }) => {
   )
 
   const contextValue = useMemo(
-    () => ({ feedbackItems, pushFeedbackItem }),
-    [feedbackItems, pushFeedbackItem]
+    () => ({ feedbackItems, addFeedbackItem }),
+    [feedbackItems, addFeedbackItem]
   )
 
   return <HistoryContext value={contextValue}>{children}</HistoryContext>
