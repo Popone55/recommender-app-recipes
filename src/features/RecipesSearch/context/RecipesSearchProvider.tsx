@@ -1,24 +1,25 @@
 import type { FeedbackItem } from '@features/History/context/HistoryContext'
 import { useHistoryContext } from '@features/History/context/useHistoryContext'
+import { useSearchStepsData } from '@hooks/useSearchStepsData/useSearchStepsData'
 import type { RecipeItem } from '@plugins/api/interfaces/recipes'
-import { useCallback, useMemo, useState, type FC, type ReactNode } from 'react'
+import { useCallback, useMemo, type FC, type ReactNode } from 'react'
 import { RecipesSearchContext } from './RecipesSearchContext'
 
 export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [areaOfInterest, setAreaOfInterest] = useState<string | null>(null)
-  const [category, setCategory] = useState<string | null>(null)
+  const {
+    areaOfInterest,
+    setAreaOfInterest,
+    category,
+    setCategory,
+    areaOfInterestValue,
+    setAreaOfInterestValue,
+    categoryValue,
+    setCategoryValue,
+    canContinueToAdvancedPreferences,
+    canContinueToResults
+  } = useSearchStepsData()
+
   const { addFeedbackItem } = useHistoryContext()
-
-  const [areaOfInterestValue, setAreaOfInterestValue] = useState<string | null>(null)
-  const [categoryValue, setCategoryValue] = useState<string | null>(null)
-
-  const canContinueToAdvancedPreferences = useMemo(() => {
-    return !!areaOfInterest
-  }, [areaOfInterest])
-
-  const canContinueToResults = useMemo(() => {
-    return canContinueToAdvancedPreferences && !!category
-  }, [canContinueToAdvancedPreferences, category])
 
   const saveFeedback = useCallback(
     (recipe: RecipeItem, feedback: 'like' | 'dislike') => {
@@ -57,11 +58,15 @@ export const RecipesSearchProvider: FC<{ children: ReactNode }> = ({ children })
     }),
     [
       areaOfInterest,
+      setAreaOfInterest,
       canContinueToAdvancedPreferences,
       canContinueToResults,
       category,
+      setCategory,
       areaOfInterestValue,
+      setAreaOfInterestValue,
       categoryValue,
+      setCategoryValue,
       saveFeedback
     ]
   )
