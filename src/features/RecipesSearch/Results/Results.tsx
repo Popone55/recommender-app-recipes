@@ -4,13 +4,13 @@ import { useRecipes } from '@hooks/api/query/useRecipes'
 import { useRandomItem } from '@hooks/useRandomItem'
 import type { RecipeItem } from '@plugins/api/interfaces/recipes'
 import { Navigate, useNavigate } from '@tanstack/react-router'
+import { Shuffle } from 'lucide-react'
 import { useMemo, type FC } from 'react'
 import { useRecipesSearch } from '../context/useRecipesSearch'
 import { RecipeItemCard } from '../RecipeItemCard/RecipeItemCard'
 import { RecipeItemCardSkeleton } from '../RecipeItemCard/RecipeItemCardSkeleton'
 import { SearchSection } from '../SearchSection/SearchSection'
 import style from './Results.module.css'
-import { Shuffle } from 'lucide-react'
 
 const ResultsContent: FC<{
   areaOfInterest: string
