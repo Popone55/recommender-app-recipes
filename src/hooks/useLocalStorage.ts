@@ -1,5 +1,5 @@
 import { logger } from '@plugins/logger'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 export const LocalStorageKey = {
   FEEDBACK_ITEMS: 'feedback-items'
@@ -35,13 +35,11 @@ export const removeLocalStorageValue = (key: LocalStorageKey) => {
 type UseLocalStorageValue<T> = readonly [
   value: T | null,
   setValue: (value: T) => void,
-  resetValue: () => void,
-  ready: boolean
+  resetValue: () => void
 ]
 
 const useLocalStorage = <T>(key: LocalStorageKey): UseLocalStorageValue<T> => {
-  const [value, setValue] = useState<T | null>(null)
-  const [ready, setReady] = useState(false)
+  const [value, setValue] = useState<T | null>(getLocalStorageValue<T>(key))
 
   const handleSetValue = useCallback(
     (value: T) => {
@@ -58,13 +56,7 @@ const useLocalStorage = <T>(key: LocalStorageKey): UseLocalStorageValue<T> => {
     setValue(null)
   }, [key])
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setValue(getLocalStorageValue<T>(key))
-    setReady(true)
-  }, [key])
-
-  return [value, handleSetValue, handleRemoveValue, ready] as const
+  return [value, handleSetValue, handleRemoveValue] as const
 }
 
 export { useLocalStorage }

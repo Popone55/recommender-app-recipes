@@ -1,22 +1,33 @@
+import { Button } from '@components/atoms/Button/Button'
 import { PillButton } from '@components/atoms/PillButton/PillButton'
 import { Card } from '@components/atoms/Typography/Card/Card'
 import { Typography } from '@components/atoms/Typography/Typography'
 import { ImageLoader } from '@components/molecules/ImageLoader/ImageLoader'
 import { useRecipeDetails } from '@hooks/api/query/useRecipeDetails'
-import type { RecipeDetails as RecipeDetailsData } from '@plugins/api/interfaces/recipes'
+import { useNavigate } from '@tanstack/react-router'
+import { ArrowLeft } from 'lucide-react'
 import { useMemo, type FC } from 'react'
 import { getRecipeIngredients } from './getRecipeIngredients'
-import { RecipeDetailsSkeleton } from './RecipeDetailsSkeleton'
+import { getRecipeTags } from './getRecipeTags'
 import style from './RecipeDetails.module.css'
+import { RecipeDetailsSkeleton } from './RecipeDetailsSkeleton'
 
-const getRecipeTags = (recipe: RecipeDetailsData) =>
-  recipe.strTags
-    ?.split(',')
-    .map((tag) => tag.trim())
-    .filter(Boolean) ?? []
+const BackButton = () => {
+  const navigate = useNavigate()
+  return (
+    <Button
+      startIcon={<ArrowLeft size={16} />}
+      variant="neutral"
+      size="medium"
+      onClick={() => navigate({ to: '/' })}>
+      Back to home
+    </Button>
+  )
+}
 
 export const RecipeDetails: FC<{ id: string }> = ({ id }) => {
   const { data, isLoading, error } = useRecipeDetails(id)
+
   const recipe = data?.meals?.[0]
 
   const ingredients = useMemo(() => (recipe ? getRecipeIngredients(recipe) : []), [recipe])
@@ -24,10 +35,7 @@ export const RecipeDetails: FC<{ id: string }> = ({ id }) => {
 
   const showError = useMemo(() => !isLoading && error, [isLoading, error])
 
-  const showEmptyState = useMemo(
-    () => !isLoading && !error && !recipe,
-    [isLoading, error, recipe]
-  )
+  const showEmptyState = useMemo(() => !isLoading && !error && !recipe, [isLoading, error, recipe])
 
   const hasInfoTags = useMemo(
     () => !!recipe?.strCategory || !!recipe?.strArea || !!recipe?.strCountry || tags.length > 0,
@@ -52,21 +60,34 @@ export const RecipeDetails: FC<{ id: string }> = ({ id }) => {
 
   return (
     <div className={style.root}>
+      {!showError && !showEmptyState && (
+        <div className={style.navigation}>
+          <BackButton />
+        </div>
+      )}
       <Card className={style.card}>
         {showError && (
-          <Typography
-            className={style.error}
-            size="m"
-            weight="bold">
-            An error occurred while fetching the recipe details. Please try again later.
-          </Typography>
+          <div className={style.placeholder}>
+            <Typography
+              align="center"
+              className={style.error}
+              size="m"
+              weight="bold">
+              An error occurred while fetching the recipe details. Please try again later.
+            </Typography>
+            <BackButton />
+          </div>
         )}
         {showEmptyState && (
-          <Typography
-            size="m"
-            weight="bold">
-            Recipe not found.
-          </Typography>
+          <div className={style.placeholder}>
+            <Typography
+              align="center"
+              size="m"
+              weight="bold">
+              Recipe not found.
+            </Typography>
+            <BackButton />
+          </div>
         )}
         {recipe && (
           <>

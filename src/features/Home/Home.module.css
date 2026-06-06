@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: var(--spacing-m);
   background-color: var(--neutral-100);
   padding: var(--spacing-2xl);
@@ -15,6 +14,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
     gap: var(--spacing-xl);
+    margin: auto;
 
     .card {
       display: flex;

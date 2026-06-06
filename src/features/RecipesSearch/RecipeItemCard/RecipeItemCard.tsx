@@ -4,7 +4,7 @@ import { Card } from '@components/atoms/Typography/Card/Card'
 import { Typography } from '@components/atoms/Typography/Typography'
 import { ImageLoader } from '@components/molecules/ImageLoader/ImageLoader'
 import type { RecipeItem } from '@plugins/api/interfaces/recipes'
-import { useNavigate } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import { ThumbsDown, ThumbsUp } from 'lucide-react'
 import { useCallback, type FC } from 'react'
 import { useRecipesSearch } from '../context/useRecipesSearch'
@@ -59,6 +59,12 @@ export const RecipeItemCard: FC<{
                 <PillButton>{recipe.strCountry}</PillButton>
               </div>
             )}
+            <Link
+              to="/recipes/$id"
+              target='_blank'
+              params={{ id: recipe.idMeal }}>
+              View recipe
+            </Link>
           </div>
           <div className={style.feedbackActions}>
             <Typography

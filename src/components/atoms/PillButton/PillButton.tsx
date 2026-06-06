@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import type { ButtonHTMLAttributes, FC, ReactNode } from 'react'
+import { Typography } from '../Typography/Typography'
 import style from './PillButton.module.css'
 
 interface PillButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -24,7 +25,7 @@ export const PillButton: FC<PillButtonProps> = ({
       className={clsx(style.root, { [style.clickable]: !!onClick, [style.disabled]: disabled })}
       onClick={onClick}
       {...props}>
-      {children}
+      <Typography size="xs">{children}</Typography>
       {suffix}
     </Component>
   )
