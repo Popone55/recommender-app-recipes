@@ -2,11 +2,19 @@ import { Autocomplete } from '@components/organisms/Autocomplete/Autocomplete'
 import { useRecipesSearch } from '@features/RecipesSearch/context/useRecipesSearch'
 import { useCategories } from '@hooks/api/query/useCategories'
 import type { CategoriesListResponse } from '@plugins/api/interfaces/recipes'
-import { type FC } from 'react'
+import { useCallback, type FC } from 'react'
 
 export const CategoryAutocomplete: FC = () => {
   const query = useCategories()
   const { setCategory, categoryValue, setCategoryValue } = useRecipesSearch()
+
+  const getOptions = useCallback((data: CategoriesListResponse) => {
+    return data.meals.map((category) => category.strCategory)
+  }, [])
+
+  const getOptionLabel = useCallback((option: string) => {
+    return option
+  }, [])
 
   return (
     <Autocomplete<CategoriesListResponse, string>
@@ -17,8 +25,8 @@ export const CategoryAutocomplete: FC = () => {
       onChange={setCategoryValue}
       onSelect={setCategory}
       query={query}
-      getOptions={(data) => data.meals.map((category) => category.strCategory)}
-      getOptionLabel={(option) => option}
+      getOptions={getOptions}
+      getOptionLabel={getOptionLabel}
     />
   )
 }

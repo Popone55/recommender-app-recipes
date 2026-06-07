@@ -1,6 +1,7 @@
 import { Skeleton } from '@components/atoms/Skeleton/Skeleton'
 import { useState, type FC } from 'react'
 import style from './ImageLoader.module.css'
+import { logger } from '@plugins/logger'
 
 const getSuffix = (size: number) => {
   if (size <= 150) return '/small'
@@ -28,6 +29,7 @@ export const ImageLoader: FC<{ src: string; alt: string; size: number }> = ({ sr
         style={{ width: size, height: size }}
         className={!isLoaded ? style.imageHidden : undefined}
         onLoad={() => setIsLoaded(true)}
+        onError={logger.error}
       />
     </div>
   )

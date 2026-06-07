@@ -12,8 +12,7 @@ export default defineConfig({
       '@features': path.resolve(__dirname, './src/features'),
       '@plugins': path.resolve(__dirname, './src/plugins'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@dictionaries': path.resolve(__dirname, './src/dictionaries'),
-      '@tests': path.resolve(__dirname, './src/tests')
+      '@dictionaries': path.resolve(__dirname, './src/dictionaries')
     }
   },
   test: {

@@ -1,6 +1,6 @@
 import { useEffect, useEffectEvent } from 'react'
 
-export const useDebounce = (callback: () => void, dependency: unknown, delay: number) => {
+export const useDebounce = (callback: () => void, dependency: string | boolean, delay: number) => {
   const callBackEvent = useEffectEvent(() => {
     callback()
   })

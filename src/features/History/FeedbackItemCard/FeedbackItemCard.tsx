@@ -69,7 +69,7 @@ export const FeedbackItemCard: FC<{
                 <Typography
                   size="s"
                   weight="bold">
-                  Country:
+                  Category:
                 </Typography>
                 <PillButton>{feedbackItem.inputs.category}</PillButton>
               </div>

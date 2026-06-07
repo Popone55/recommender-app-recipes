@@ -22,7 +22,7 @@ export const SearchByTerm: FC<{ className?: string }> = ({ className }) => {
     () => {
       setQuery(tmpQuery)
     },
-    [tmpQuery],
+    tmpQuery,
     500
   )
 

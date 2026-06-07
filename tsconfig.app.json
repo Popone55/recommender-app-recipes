@@ -6,6 +6,7 @@
     "module": "esnext",
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
     "skipLibCheck": true,
+    "strict": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -20,13 +21,13 @@
       "@plugins/*": ["./src/plugins/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@dictionaries/*": ["./src/dictionaries/*"],
-      "@tests/*": ["./src/tests/*"],
     },
     /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    
   },
   "include": ["src"]
 }
