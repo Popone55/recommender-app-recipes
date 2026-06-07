@@ -7,14 +7,6 @@ export interface Area {
   strCountry: string
 }
 
-export interface Ingredient {
-  idIngredient: string
-  strIngredient: string
-  strDescription: string
-  strType: string
-  strThumb: string
-}
-
 export interface RecipeItem {
   idMeal: string
   strMeal: string
@@ -86,10 +78,6 @@ export type CategoriesListResponse = {
 
 export type AreasListResponse = {
   meals: Area[]
-}
-
-export type IngredientsListResponse = {
-  meals: Ingredient[]
 }
 
 export type RecipesListResponse = {

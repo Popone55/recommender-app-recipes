@@ -13,12 +13,6 @@ export const RECIPES = {
     cacheKey: ['areas'],
     staleTime: Infinity
   },
-  ingredients: {
-    path: '/list.php?i=list',
-    method: 'GET',
-    cacheKey: ['ingredients'],
-    staleTime: Infinity
-  },
   recipes: {
     path: (areaOfInterest: string, category: string) => {
       return `/filter.php?a=${areaOfInterest}&c=${category}`
