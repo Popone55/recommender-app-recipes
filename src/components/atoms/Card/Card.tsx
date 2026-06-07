@@ -18,7 +18,7 @@ export const Card: FC<{
 }> = ({ children, className, onClick }) => {
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (!onClick) return
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === 'Enter') {
       event.preventDefault()
       onClick()
     }
