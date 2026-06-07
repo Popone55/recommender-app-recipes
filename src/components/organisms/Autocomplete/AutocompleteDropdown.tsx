@@ -39,10 +39,7 @@ export const AutocompleteDropdown = <TOption,>({
   if (isLoading) {
     return (
       <div className={style.status}>
-        <LoadingSpinner
-          size="xsmall"
-          variant="gray"
-        />
+        <LoadingSpinner size="xsmall" />
         <Typography size="xs">{loadingText}</Typography>
       </div>
     )

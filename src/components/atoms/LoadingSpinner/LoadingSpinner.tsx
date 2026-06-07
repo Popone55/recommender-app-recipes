@@ -4,10 +4,9 @@ import style from './LoadingSpinner.module.css'
 
 interface LoadingSpinnerProps {
   size?: 'large' | 'medium' | 'small' | 'xsmall' | 'xxsmall' | 'xxxsmall'
-  variant?: 'primary' | 'gray' | 'white'
 }
 
-export const LoadingSpinner: FC<LoadingSpinnerProps> = ({ size = 'large', variant = 'gray' }) => (
+export const LoadingSpinner: FC<LoadingSpinnerProps> = ({ size = 'large' }) => (
   <div
     data-aptus-id="loader"
     className={clsx(style.root, {
@@ -19,11 +18,7 @@ export const LoadingSpinner: FC<LoadingSpinnerProps> = ({ size = 'large', varian
       [style.xxxsmall]: size === 'xxxsmall'
     })}>
     <svg
-      className={clsx(style.spinner, {
-        [style.primary]: variant === 'primary',
-        [style.gray]: variant === 'gray',
-        [style.white]: variant === 'white'
-      })}
+      className={style.spinner}
       viewBox="0 0 66 66"
       xmlns="http://www.w3.org/2000/svg">
       <circle

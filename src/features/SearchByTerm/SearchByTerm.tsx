@@ -42,10 +42,7 @@ export const SearchByTerm: FC<{ className?: string }> = ({ className }) => {
       />
       {isLoading && (
         <div className={style.loading}>
-          <LoadingSpinner
-            size="small"
-            variant="gray"
-          />
+          <LoadingSpinner size="small" />
         </div>
       )}
       {error && (
