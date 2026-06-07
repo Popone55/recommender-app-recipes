@@ -40,7 +40,6 @@ export const TextInput: FC<TextInputProps> = ({
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
     inputProps.onKeyDown?.(event)
-    if (event.defaultPrevented) return
     if (!onEnter) return
     if (event.key === 'Enter') {
       event.preventDefault()
