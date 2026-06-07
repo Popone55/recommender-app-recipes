@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { FC, ReactNode } from 'react'
+import type { FC, KeyboardEvent, ReactNode } from 'react'
 import style from './Card.module.css'
 
 const a11yProps = (clickable: boolean) => {
@@ -16,11 +16,19 @@ export const Card: FC<{
   className?: string
   onClick?: () => void
 }> = ({ children, className, onClick }) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (!onClick) return
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      onClick()
+    }
+  }
+
   return (
     <div
       {...a11yProps(!!onClick)}
       onClick={onClick}
-      onKeyDown={onClick}
+      onKeyDown={handleKeyDown}
       className={clsx(style.root, { [style.clickable]: !!onClick }, className)}>
       {children}
     </div>

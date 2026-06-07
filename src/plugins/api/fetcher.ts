@@ -39,8 +39,8 @@ export const fetcher = async <T>(
   }
 
   try {
-    return response.json() as PromiseLike<T>
-  } catch {
-    throw new Error('Invalid JSON response')
+    return (await response.json()) as T
+  } catch (err) {
+    throw new HttpError('Invalid JSON response', response.status, err)
   }
 }
