@@ -7,11 +7,11 @@ export const pickRandomIndex = (length: number, excludeIndex?: number | null) =>
     return 0
   }
 
-  let index = Math.floor(Math.random() * length)
+  let index: number
 
-  while (excludeIndex != null && index === excludeIndex) {
+  do {
     index = Math.floor(Math.random() * length)
-  }
+  } while (index === excludeIndex)
 
   return index
 }
