@@ -43,10 +43,8 @@ const useLocalStorage = <T>(key: LocalStorageKey): UseLocalStorageValue<T> => {
 
   const handleSetValue = useCallback(
     (value: T) => {
-      const localStorageValue = setLocalStorageValue<T>(key, value)
-      if (localStorageValue !== undefined) {
-        setValue(localStorageValue)
-      }
+      setLocalStorageValue<T>(key, value)
+      setValue(value)
     },
     [key]
   )
