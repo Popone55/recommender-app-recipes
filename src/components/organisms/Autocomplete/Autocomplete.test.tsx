@@ -18,7 +18,7 @@ const defaultQuery: AutocompleteQueryResult<TestOption[]> = {
   error: null
 }
 
-interface AutocompleteHarnessProps {
+interface AutocompleteWrapperProps {
   initialValue?: string
   onChange?: (value: string) => void
   onSelect?: (option: TestOption) => void
@@ -26,13 +26,13 @@ interface AutocompleteHarnessProps {
   disabled?: boolean
 }
 
-const AutocompleteHarness = ({
+const AutocompleteWrapper = ({
   initialValue = '',
   onChange,
   onSelect,
   query = defaultQuery,
   disabled
-}: AutocompleteHarnessProps) => {
+}: AutocompleteWrapperProps) => {
   const [value, setValue] = useState(initialValue)
 
   return (
@@ -55,7 +55,7 @@ const AutocompleteHarness = ({
 
 describe('Autocomplete test suite', () => {
   it('should render the combobox with label and placeholder', () => {
-    render(<AutocompleteHarness />)
+    render(<AutocompleteWrapper />)
 
     expect(screen.getByText('Area')).toBeInTheDocument()
     expect(screen.getByRole('combobox')).toHaveAttribute('placeholder', 'Search areas')
@@ -64,7 +64,7 @@ describe('Autocomplete test suite', () => {
   it('should show options when the input is focused', async () => {
     const user = userEvent.setup()
 
-    render(<AutocompleteHarness />)
+    render(<AutocompleteWrapper />)
 
     await user.click(screen.getByRole('combobox'))
 
@@ -76,7 +76,7 @@ describe('Autocomplete test suite', () => {
   it('should filter options as the user types', async () => {
     const user = userEvent.setup()
 
-    render(<AutocompleteHarness />)
+    render(<AutocompleteWrapper />)
 
     const input = screen.getByRole('combobox')
     await user.click(input)
@@ -93,7 +93,7 @@ describe('Autocomplete test suite', () => {
     const onChange = vi.fn()
 
     render(
-      <AutocompleteHarness
+      <AutocompleteWrapper
         onSelect={onSelect}
         onChange={onChange}
       />
@@ -110,7 +110,7 @@ describe('Autocomplete test suite', () => {
   it('should show a loading message while fetching options', async () => {
     const user = userEvent.setup()
 
-    render(<AutocompleteHarness query={{ data: undefined, isLoading: true, error: null }} />)
+    render(<AutocompleteWrapper query={{ data: undefined, isLoading: true, error: null }} />)
 
     await user.click(screen.getByRole('combobox'))
 
@@ -121,7 +121,7 @@ describe('Autocomplete test suite', () => {
     const user = userEvent.setup()
 
     render(
-      <AutocompleteHarness
+      <AutocompleteWrapper
         query={{ data: testOptions, isLoading: false, error: new Error('Request failed') }}
       />
     )
@@ -134,7 +134,7 @@ describe('Autocomplete test suite', () => {
   it('should show a no results message when the filter matches nothing', async () => {
     const user = userEvent.setup()
 
-    render(<AutocompleteHarness />)
+    render(<AutocompleteWrapper />)
 
     const input = screen.getByRole('combobox')
     await user.click(input)
@@ -146,7 +146,7 @@ describe('Autocomplete test suite', () => {
   it('should reset keyboard navigation when the dropdown is closed and reopened', async () => {
     const user = userEvent.setup()
 
-    render(<AutocompleteHarness />)
+    render(<AutocompleteWrapper />)
 
     const input = screen.getByRole('combobox')
     await user.click(input)
@@ -168,7 +168,7 @@ describe('Autocomplete test suite', () => {
     const onChange = vi.fn()
 
     render(
-      <AutocompleteHarness
+      <AutocompleteWrapper
         initialValue="Italian"
         onChange={onChange}
       />
