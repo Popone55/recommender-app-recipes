@@ -18,7 +18,7 @@ export const useRandomItem = <T>(items: T[] | undefined | null) => {
   }, !!items?.length)
 
   return useMemo(
-    () => ({ item: index != null && items ? items[index] : null, pickAnother }),
+    () => ({ item: index !== null && items ? items[index] : null, pickAnother }),
     [index, items, pickAnother]
   )
 }
