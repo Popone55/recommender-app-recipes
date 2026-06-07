@@ -44,6 +44,8 @@ export const Button: FC<ButtonProps> = ({
       type={type}
       disabled={isDisabled}
       aria-label={ariaLabel}
+      aria-busy={loading}
+      aria-disabled={isDisabled}
       onClick={onClick}
       className={clsx(
         style.root,
