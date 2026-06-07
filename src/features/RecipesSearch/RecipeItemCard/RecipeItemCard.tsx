@@ -5,7 +5,7 @@ import { Typography } from '@components/atoms/Typography/Typography'
 import { ImageLoader } from '@components/molecules/ImageLoader/ImageLoader'
 import type { RecipeItem } from '@plugins/api/interfaces/recipes'
 import { Link, useNavigate } from '@tanstack/react-router'
-import { ThumbsDown, ThumbsUp } from 'lucide-react'
+import { ExternalLink, ThumbsDown, ThumbsUp } from 'lucide-react'
 import { useCallback, type FC } from 'react'
 import { useRecipesSearch } from '../context/useRecipesSearch'
 import style from './RecipeItemCard.module.css'
@@ -39,32 +39,7 @@ export const RecipeItemCard: FC<{
         />
         <div className={style.info}>
           <div className={style.infoTags}>
-            {!!recipe.strArea && (
-              <div className={style.infoTag}>
-                <Typography
-                  size="s"
-                  weight="bold">
-                  Area:
-                </Typography>
-                <PillButton>{recipe.strArea}</PillButton>
-              </div>
-            )}
-            {!!recipe.strCountry && (
-              <div className={style.infoTag}>
-                <Typography
-                  size="s"
-                  weight="bold">
-                  Country:
-                </Typography>
-                <PillButton>{recipe.strCountry}</PillButton>
-              </div>
-            )}
-            <Link
-              to="/recipes/$id"
-              target='_blank'
-              params={{ id: recipe.idMeal }}>
-              View recipe
-            </Link>
+            {!!recipe.strArea && <PillButton>{recipe.strArea}</PillButton>}
           </div>
           <div className={style.feedbackActions}>
             <Typography
@@ -89,6 +64,18 @@ export const RecipeItemCard: FC<{
               </Button>
             </div>
           </div>
+          <Link
+            to="/recipes/$id"
+            target="_blank"
+            className={style.viewRecipeButton}
+            params={{ id: recipe.idMeal }}>
+            <Button
+              variant="neutral"
+              size="small"
+              endIcon={<ExternalLink size={16} />}>
+              View recipe
+            </Button>
+          </Link>
         </div>
       </div>
     </Card>

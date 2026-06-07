@@ -17,6 +17,7 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onC
   size?: 'small' | 'medium' | 'large'
   ref?: RefObject<HTMLButtonElement>
   startIcon?: ReactNode
+  endIcon?: ReactNode
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -31,6 +32,7 @@ export const Button: FC<ButtonProps> = ({
   'aria-label': ariaLabel,
   ref,
   startIcon,
+  endIcon,
   ...rest
 }) => {
   const isDisabled = disabled || loading
@@ -58,6 +60,7 @@ export const Button: FC<ButtonProps> = ({
       {loading && <LoadingSpinner size="xsmall" />}
       {startIcon}
       {children}
+      {endIcon}
     </button>
   )
 }

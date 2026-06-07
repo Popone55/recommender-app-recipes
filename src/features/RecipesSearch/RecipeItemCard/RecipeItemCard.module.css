@@ -12,19 +12,12 @@
   .info {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-2xl);
     justify-content: space-between;
 
     .infoTags {
       display: flex;
-      flex-direction: column;
       gap: var(--spacing-l);
-
-      .infoTag {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-s);
-      }
     }
 
     .feedbackActions {
@@ -40,4 +33,9 @@
       }
     }
   }
+}
+
+.viewRecipeButton {
+    text-decoration: none;
+    color: inherit;
 }

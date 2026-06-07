@@ -1,3 +1,4 @@
+import { Button } from '@components/atoms/Button/Button'
 import { LoadingSpinner } from '@components/atoms/LoadingSpinner/LoadingSpinner'
 import { PillButton } from '@components/atoms/PillButton/PillButton'
 import { Card } from '@components/atoms/Typography/Card/Card'
@@ -8,6 +9,7 @@ import { useSearchRecipes } from '@hooks/api/query/useSearchRecipes'
 import { useDebounce } from '@hooks/useDebounce'
 import { Link } from '@tanstack/react-router'
 import clsx from 'clsx'
+import { ExternalLink } from 'lucide-react'
 import { useMemo, useState, type FC } from 'react'
 import style from './SearchByTerm.module.css'
 
@@ -79,13 +81,22 @@ export const SearchByTerm: FC<{ className?: string }> = ({ className }) => {
                 alt={meal.strMeal}
                 size={80}
               />
-              <Typography
-                size="m"
-                weight="bold">
-                {meal.strMeal}
-              </Typography>
-              {!!meal.strArea && <PillButton>{meal.strArea}</PillButton>}
-              {!!meal.strCountry && <PillButton>{meal.strCountry}</PillButton>}
+              <div className={style.resultItemContent}>
+                <div className={style.resultItemContentTitle}>
+                  <Typography
+                    size="m"
+                    weight="bold">
+                    {meal.strMeal}
+                  </Typography>
+                  {!!meal.strArea && <PillButton>{meal.strArea}</PillButton>}
+                </div>
+                <Button
+                  variant="neutral"
+                  size="small"
+                  endIcon={<ExternalLink size={16} />}>
+                  View recipe
+                </Button>
+              </div>
             </Card>
           </Link>
         ))}
