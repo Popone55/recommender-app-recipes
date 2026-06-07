@@ -50,12 +50,14 @@ const ResultsContent: FC<{
       actionsEl={
         <>
           <Button
+            aria-label="Back to advanced preferences"
             variant="neutral"
             size="medium"
             onClick={() => navigate({ to: '/recipes/search/advanced-preferences' })}>
             Back
           </Button>
           <Button
+            aria-label="Try another recipe"
             startIcon={<Shuffle size={16} />}
             variant="purple"
             size="medium"

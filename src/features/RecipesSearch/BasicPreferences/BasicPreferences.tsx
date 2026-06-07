@@ -50,6 +50,7 @@ export const BasicPreferences = () => {
       actionsEl={
         <>
           <Button
+            aria-label="Back to home"
             variant="neutral"
             size="medium"
             onClick={() => navigate({ to: '/' })}>
@@ -57,6 +58,7 @@ export const BasicPreferences = () => {
           </Button>
           {canContinueToAdvancedPreferences && (
             <Button
+              aria-label="Continue to advanced preferences"
               variant="purple"
               size="medium"
               onClick={() => navigate({ to: '/recipes/search/advanced-preferences' })}>

@@ -38,5 +38,9 @@ export const fetcher = async <T>(
     return await throwErrorMessageFromResponse(response)
   }
 
-  return response.json() as PromiseLike<T>
+  try {
+    return response.json() as PromiseLike<T>
+  } catch {
+    throw new Error('Invalid JSON response')
+  }
 }

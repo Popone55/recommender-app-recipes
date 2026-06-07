@@ -16,6 +16,7 @@ const BackButton = () => {
   const navigate = useNavigate()
   return (
     <Button
+      aria-label="Back to home"
       startIcon={<ArrowLeft size={16} />}
       variant="neutral"
       size="medium"

@@ -4,7 +4,7 @@ import { PillButton } from '@components/atoms/PillButton/PillButton'
 import { Typography } from '@components/atoms/Typography/Typography'
 import { ImageLoader } from '@components/molecules/ImageLoader/ImageLoader'
 import type { RecipeItem } from '@plugins/api/interfaces/recipes'
-import { Link, useNavigate } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import { ExternalLink, ThumbsDown, ThumbsUp } from 'lucide-react'
 import { useCallback, type FC } from 'react'
 import { useRecipesSearch } from '../context/useRecipesSearch'
@@ -51,6 +51,7 @@ export const RecipeItemCard: FC<{
               <Button
                 variant="neutral"
                 size="small"
+                aria-label="Dislike recipe"
                 title="Dislike"
                 onClick={() => onSaveFeedback('dislike')}>
                 <ThumbsDown size={16} />
@@ -58,24 +59,22 @@ export const RecipeItemCard: FC<{
               <Button
                 variant="purple"
                 size="small"
+                aria-label="Like recipe"
                 title="Like"
                 onClick={() => onSaveFeedback('like')}>
                 <ThumbsUp size={16} />
               </Button>
             </div>
           </div>
-          <Link
-            to="/recipes/$id"
-            target="_blank"
-            className={style.viewRecipeButton}
-            params={{ id: recipe.idMeal }}>
-            <Button
-              variant="neutral"
-              size="small"
-              endIcon={<ExternalLink size={16} />}>
-              View recipe
-            </Button>
-          </Link>
+
+          <Button
+            variant="neutral"
+            aria-label="View recipe"
+            size="small"
+            onClick={() => navigate({ to: '/recipes/$id', params: { id: recipe.idMeal } })}
+            endIcon={<ExternalLink size={16} />}>
+            View recipe
+          </Button>
         </div>
       </div>
     </Card>

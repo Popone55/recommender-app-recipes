@@ -10,6 +10,7 @@ export const RecipesSearchLayout: FC<{ children: ReactNode }> = ({ children }) =
   return (
     <div className={style.root}>
       <Button
+        aria-label="Back to home"
         variant="neutral"
         size="small"
         startIcon={<ArrowLeft size={16} />}
