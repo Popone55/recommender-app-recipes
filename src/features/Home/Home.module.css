@@ -9,6 +9,11 @@
   container-name: home;
   height: 100%;
 
+  .cardLink {
+    text-decoration: none;
+    color: inherit;
+  }
+
   .cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
