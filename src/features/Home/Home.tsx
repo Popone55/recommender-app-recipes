@@ -27,7 +27,6 @@ export const Home = () => {
           <Button
             variant="purple"
             size="large"
-            onClick={() => navigate({ to: '/recipes/search/basic-preferences' })}
             aria-label="Get started button">
             Get started
           </Button>
