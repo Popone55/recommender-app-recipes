@@ -53,6 +53,9 @@ export const RecipeDetails: FC<{ id: string }> = ({ id }) => {
   if (isLoading) {
     return (
       <div className={style.root}>
+        <div className={style.navigation}>
+          <BackButton />
+        </div>
         <RecipeDetailsSkeleton />
       </div>
     )
