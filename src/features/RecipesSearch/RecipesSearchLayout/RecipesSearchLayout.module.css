@@ -2,10 +2,12 @@
   height: 100%;
   width: min(100%, 600px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   margin: 0 auto;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xl);
 
   .card {
     width: 100%;
