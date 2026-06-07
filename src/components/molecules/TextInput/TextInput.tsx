@@ -73,6 +73,8 @@ export const TextInput: FC<TextInputProps> = ({
             disabled={disabled}
             type="text"
             placeholder={placeholder}
+            aria-placeholder={placeholder}
+            aria-disabled={disabled}
             value={definedValue}
             onChange={(e) => onChange?.(e.target.value)}
             onBlur={() => onBlur?.(definedValue)}
