@@ -21,7 +21,7 @@ export const useRecipes = ({
 
       // Filtering by two criteria at the same time is not possible with the API, so we filter here by the only field returned by the API.
       return {
-        meals: response?.meals?.filter((meal) => meal.strArea == areaOfInterest) ?? null
+        meals: response?.meals?.filter((meal) => meal.strArea === areaOfInterest) ?? null
       }
     },
     staleTime: recipes.staleTime
