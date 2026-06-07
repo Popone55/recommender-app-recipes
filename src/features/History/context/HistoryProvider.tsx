@@ -9,7 +9,10 @@ export const HistoryProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   const addFeedbackItem = useCallback(
     (feedbackItem: FeedbackItem) => {
-      setFeedbackItems([feedbackItem, ...(feedbackItems ?? [])])
+      setFeedbackItems([
+        feedbackItem,
+        ...(feedbackItems?.filter((item) => item.id !== feedbackItem.id) ?? [])
+      ])
     },
     [feedbackItems, setFeedbackItems]
   )
