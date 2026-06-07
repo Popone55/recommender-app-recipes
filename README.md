@@ -15,6 +15,8 @@ A React application that helps users discover recipes from [TheMealDB](https://w
 npm install
 ```
 
+This also runs the `prepare` script, which sets up [Husky](https://typicode.github.io/husky/) git hooks.
+
 ### Environment variables
 
 The app reads configuration from a `.env` file at the project root. Vite only exposes variables prefixed with `VITE_` to the client.
@@ -49,11 +51,27 @@ Open the URL printed in the terminal (typically `http://localhost:5173`).
 
 ### Other scripts
 
-| Command           | Description                          |
-| ----------------- | ------------------------------------ |
-| `npm run build`   | Type-check and build for production. |
-| `npm run preview` | Serve the production build locally.  |
-| `npm run lint`    | Run ESLint with zero warnings allowed. |
+| Command             | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| `npm run build`     | Type-check and build for production.             |
+| `npm run preview`   | Serve the production build locally.              |
+| `npm run lint`      | Run ESLint with zero warnings allowed.           |
+| `npm run test`      | Run Vitest in watch mode.                        |
+| `npm run test:run`  | Run the test suite once (non-watch).             |
+
+### Testing
+
+The project uses [Vitest](https://vitest.dev/) with [Testing Library](https://testing-library.com/) and a jsdom environment. Configuration lives in `vite.config.ts`; shared setup (jest-dom matchers, automatic cleanup) is in `src/tests/setup.ts`.
+
+Current test coverage:
+
+| Area | File |
+| ---- | ---- |
+| `Button` atom | `src/components/atoms/Button/Button.test.tsx` |
+| `Autocomplete` organism | `src/components/organisms/Autocomplete/Autocomplete.test.tsx` |
+| Search wizard state | `src/hooks/useSearchStepsData/useSearchStepsData.test.ts` |
+
+A Husky **pre-push** hook (`.husky/pre-push`) runs `npm run lint` and `npm run test` before every push, so keep the suite green before pushing.
 
 ## Features
 
@@ -61,13 +79,13 @@ Open the URL printed in the terminal (typically `http://localhost:5173`).
 
 The home page combines three entry points:
 
-1. **Guided flow** — A card that starts the step-by-step preference wizard (`/recipes/search/basic-preferences`).
-2. **Search by term** — A debounced text search (500 ms) against TheMealDB's search endpoint. Results link to the recipe detail page.
-3. **History** — A list of past like/dislike feedback, shown only when entries exist. Each item links back to the recipe it refers to.
+1. **Guided flow** — A card wrapped in a TanStack Router `Link` to `/recipes/search/basic-preferences`, so the whole card is navigable (with a "Get started" button inside).
+2. **Search by term** — A debounced text search (500 ms) against TheMealDB's search endpoint. Each hit is rendered by `SearchResultCard` (thumbnail, title, area pill, "View recipe" button) and links to the recipe detail page.
+3. **History** — A list of past like/dislike feedback. The section is omitted entirely when no entries exist. Each item links back to the recipe it refers to.
 
 ### Guided preference flow
 
-A three-step wizard scoped under `/recipes/search`:
+A three-step wizard scoped under `/recipes/search`, wrapped in `RecipesSearchLayout` with a persistent **Back to home** button on every step:
 
 1. **Basic preferences** — Select an area of interest (e.g. Italian) via autocomplete.
 2. **Advanced preferences** — Select a category (e.g. Pasta) via autocomplete. Users cannot reach this step without first choosing an area; attempting to skip ahead redirects back.
@@ -93,7 +111,7 @@ When a user likes or dislikes a recipe from the guided flow, a history entry is 
 - The area and category inputs used during that session
 - A creation timestamp
 
-New entries are prepended so the most recent feedback appears first.
+New entries are prepended so the most recent feedback appears first. If the user gives feedback on a recipe that already has an entry, the older entry is replaced (deduplicated by recipe id).
 
 ## Design and architecture
 
@@ -119,25 +137,27 @@ src/
 ├── plugins/        # API client, logger, utilities
 ├── routes/         # TanStack Router file routes
 ├── dictionaries/   # Environment and constants
-└── styles/         # Global styles and CSS variables
+├── styles/         # Global styles and CSS variables
+└── tests/          # Vitest setup and shared test utilities
 ```
 
-Path aliases (`@components`, `@features`, `@hooks`, `@plugins`, `@dictionaries`) are configured in `vite.config.ts`.
+Path aliases (`@components`, `@features`, `@hooks`, `@plugins`, `@dictionaries`, `@tests`) are configured in `vite.config.ts`.
 
 ### Routing
 
 - File-based routes under `src/routes/` with auto-generated `routeTree.gen.ts`.
 - Code splitting is enabled via the TanStack Router Vite plugin.
-- Route-level providers:
+- Route-level layout and providers:
   - `HistoryProvider` wraps the entire app at the root route.
-  - `RecipesSearchProvider` wraps only the `/recipes/search/*` subtree, keeping search state scoped to the wizard.
+  - `RecipesSearchLayout` wraps the `/recipes/search/*` subtree with a back-to-home control and card container.
+  - `RecipesSearchProvider` sits inside the layout, keeping wizard state scoped to the search flow.
 
 ### State management
 
 | Concern              | Approach                                                                 |
 | -------------------- | ------------------------------------------------------------------------ |
 | API data             | TanStack Query with declarative cache keys and `staleTime: Infinity`     |
-| Search wizard inputs | React Context (`RecipesSearchProvider`) — area, category, validation flags |
+| Search wizard inputs | `useSearchStepsData` hook (area, category, validation flags) consumed by `RecipesSearchProvider` |
 | Feedback history     | React Context + `localStorage` via `useLocalStorage`                       |
 | Ephemeral UI state   | Local `useState` (search input, autocomplete open state, etc.)           |
 
@@ -196,7 +216,7 @@ Primitives follow [atomic design](https://bradfrost.com/blog/post/atomic-web-des
 
 **Typography** — Props: `size` (`2xs`–`5xl`), `weight` (`regular` \| `medium` \| `bold`), `align`, and polymorphic `as`. Each maps to a CSS Module class bound to a `--font-size-*` token.
 
-**Button** — Props: `variant` (`neutral` \| `purple`), `size` (`small` \| `medium` \| `large`). Heights are spacing tokens (`3xl` / `4xl` / `5xl`). States: hover, active, disabled, `focus-visible` outline. Supports `loading` (inline spinner) and `startIcon`.
+**Button** — Props: `variant` (`neutral` \| `purple`), `size` (`small` \| `medium` \| `large`). Heights are spacing tokens (`3xl` / `4xl` / `5xl`). States: hover, active, disabled, `focus-visible` outline. Supports `loading` (inline spinner), `startIcon`, and `endIcon` (used on "View recipe" actions in cards).
 
 **Card** — White surface, `neutral-300` border, `elevation-neutral-raised`. Hover shifts to `elevation-purple-raised`. Optional `onClick` adds `role="button"` and pointer cursor.
 
