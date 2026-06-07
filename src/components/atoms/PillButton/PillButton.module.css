@@ -13,15 +13,15 @@
 
   &.clickable {
     cursor: pointer;
-  }
 
-  &:hover {
-    background-color: var(--purple-200);
-  }
+    &:hover {
+      background-color: var(--purple-200);
+    }
 
-  &:focus-visible {
-    outline: var(--spacing-2xs) solid var(--purple-500);
-    outline-offset: var(--spacing-2xs);
+    &:focus-visible {
+      outline: var(--spacing-2xs) solid var(--purple-500);
+      outline-offset: var(--spacing-2xs);
+    }
   }
 
   &:disabled {

@@ -1,5 +1,5 @@
+import { Card } from '@components/atoms/Card/Card'
 import { LoadingSpinner } from '@components/atoms/LoadingSpinner/LoadingSpinner'
-import { Card } from '@components/atoms/Typography/Card/Card'
 import { Typography } from '@components/atoms/Typography/Typography'
 import { TextInput } from '@components/molecules/TextInput/TextInput'
 import { useSearchRecipes } from '@hooks/api/query/useSearchRecipes'

@@ -1,5 +1,5 @@
 import { Button } from '@components/atoms/Button/Button'
-import { Card } from '@components/atoms/Typography/Card/Card'
+import { Card } from '@components/atoms/Card/Card'
 import { useNavigate } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
 import type { FC, ReactNode } from 'react'

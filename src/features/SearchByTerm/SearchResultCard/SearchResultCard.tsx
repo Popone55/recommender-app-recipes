@@ -1,6 +1,6 @@
 import { Button } from '@components/atoms/Button/Button'
+import { Card } from '@components/atoms/Card/Card'
 import { PillButton } from '@components/atoms/PillButton/PillButton'
-import { Card } from '@components/atoms/Typography/Card/Card'
 import { Typography } from '@components/atoms/Typography/Typography'
 import { ImageLoader } from '@components/molecules/ImageLoader/ImageLoader'
 import type { RecipeItem } from '@plugins/api/interfaces/recipes'

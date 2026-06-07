@@ -1,5 +1,5 @@
 import { Button } from '@components/atoms/Button/Button'
-import { Card } from '@components/atoms/Typography/Card/Card'
+import { Card } from '@components/atoms/Card/Card'
 import { Typography } from '@components/atoms/Typography/Typography'
 import { SearchByTerm } from '@features/SearchByTerm/SearchByTerm'
 import { Link, useNavigate } from '@tanstack/react-router'
@@ -12,7 +12,9 @@ export const Home = () => {
   return (
     <div className={style.root}>
       <div className={style.cards}>
-        <Link to="/recipes/search/basic-preferences" className={style.cardLink}>
+        <Link
+          to="/recipes/search/basic-preferences"
+          className={style.cardLink}>
           <Card
             className={style.card}
             onClick={() => navigate({ to: '/recipes/search/basic-preferences' })}>

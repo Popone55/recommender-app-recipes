@@ -1,4 +1,4 @@
-import { Card } from '@components/atoms/Typography/Card/Card'
+import { Card } from '@components/atoms/Card/Card'
 import { Typography } from '@components/atoms/Typography/Typography'
 import clsx from 'clsx'
 import type { FC } from 'react'

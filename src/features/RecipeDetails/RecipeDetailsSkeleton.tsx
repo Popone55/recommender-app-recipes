@@ -1,5 +1,5 @@
+import { Card } from '@components/atoms/Card/Card'
 import { Skeleton } from '@components/atoms/Skeleton/Skeleton'
-import { Card } from '@components/atoms/Typography/Card/Card'
 import style from './RecipeDetails.module.css'
 
 export const RecipeDetailsSkeleton = () => {
