@@ -143,6 +143,26 @@ describe('Autocomplete test suite', () => {
     expect(screen.getByText('No results found')).toBeInTheDocument()
   })
 
+  it('should reset keyboard navigation when the dropdown is closed and reopened', async () => {
+    const user = userEvent.setup()
+
+    render(<AutocompleteHarness />)
+
+    const input = screen.getByRole('combobox')
+    await user.click(input)
+    await user.keyboard('{ArrowDown}{ArrowDown}')
+
+    expect(screen.getByRole('option', { name: 'Mexican' })).toHaveAttribute('data-active', 'true')
+
+    await user.keyboard('{Escape}')
+    expect(screen.queryByRole('option', { name: 'Italian' })).not.toBeInTheDocument()
+
+    await user.click(input)
+    await user.keyboard('{ArrowDown}')
+
+    expect(screen.getByRole('option', { name: 'Italian' })).toHaveAttribute('data-active', 'true')
+  })
+
   it('should clear the value when the clear button is clicked', async () => {
     const user = userEvent.setup()
     const onChange = vi.fn()

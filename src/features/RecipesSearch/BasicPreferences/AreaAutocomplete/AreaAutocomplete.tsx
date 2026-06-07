@@ -10,8 +10,8 @@ export const AreaAutocomplete: FC = () => {
 
   return (
     <Autocomplete<AreasListResponse, string>
-      label="Area of interest"
-      placeholder="Search for an area of interest"
+      label="Area"
+      placeholder="Search for an area"
       errorText="Something went wrong, retry later."
       value={areaOfInterestValue ?? ''}
       onChange={setAreaOfInterestValue}

@@ -42,7 +42,7 @@ export const AdvancedPreferences = () => {
         </Typography>
       }
       descriptionEl={
-        <Typography>We'll use this to find recipes that match your interests.</Typography>
+        <Typography>We'll use this to find recipes that match your preferred category.</Typography>
       }
       selectionEl={
         !!category && (

@@ -71,10 +71,7 @@ export const Autocomplete = <TData, TOption>({
   const listRef = useRef<Array<HTMLElement | null>>([])
 
   const handleOpenChange = useCallback((shouldOpen: boolean) => {
-    if (!shouldOpen) {
-      setActiveIndex(null)
-      listRef.current = []
-    }
+    setActiveIndex(null)
     setOpen(shouldOpen)
   }, [])
 
@@ -119,7 +116,7 @@ export const Autocomplete = <TData, TOption>({
     onNavigate: setActiveIndex,
     loop: true,
     virtual: true,
-    enabled: open && filteredOptions.length > 0
+    enabled: filteredOptions.length > 0
   })
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions([
@@ -134,13 +131,17 @@ export const Autocomplete = <TData, TOption>({
     return `${listboxId}-option-${activeIndex}`
   }, [listboxId, open, activeIndex])
 
-  const referenceProps = getReferenceProps({
-    onFocus: () => setOpen(true)
-  }) as {
-    onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
-    onFocus?: (event: FocusEvent<HTMLInputElement>) => void
-    onPointerDown?: (event: PointerEvent<HTMLInputElement>) => void
-  }
+  const referenceProps = useMemo(
+    () =>
+      getReferenceProps({
+        onFocus: () => handleOpenChange(true)
+      }) as {
+        onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
+        onFocus?: (event: FocusEvent<HTMLInputElement>) => void
+        onPointerDown?: (event: PointerEvent<HTMLInputElement>) => void
+      },
+    [getReferenceProps, handleOpenChange]
+  )
 
   const handleSelect = useCallback(
     (option: TOption) => {
@@ -153,24 +154,30 @@ export const Autocomplete = <TData, TOption>({
 
   const handleClear = useCallback(() => {
     onChange('')
-    setActiveIndex(null)
-    setOpen(true)
-  }, [onChange])
+    handleOpenChange(true)
+  }, [handleOpenChange, onChange])
 
   const handleInputKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
       referenceProps.onKeyDown?.(event)
-      if (event.defaultPrevented) return
 
       if (event.key === 'Enter') {
         const option = activeIndex ? filteredOptions[activeIndex] : filteredOptions[0]
         if (option) {
-          event.preventDefault()
           handleSelect(option)
         }
       }
     },
     [activeIndex, filteredOptions, handleSelect, referenceProps]
+  )
+
+  const handleChange = useCallback(
+    (value: string) => {
+      onChange(value)
+      setActiveIndex(null)
+      setOpen(true)
+    },
+    [onChange]
   )
 
   return (
@@ -188,11 +195,7 @@ export const Autocomplete = <TData, TOption>({
         aria-autocomplete="list"
         aria-controls={open ? listboxId : undefined}
         aria-activedescendant={activeOptionId}
-        onChange={(nextValue) => {
-          onChange(nextValue)
-          setOpen(true)
-          setActiveIndex(null)
-        }}
+        onChange={handleChange}
         onKeyDown={handleInputKeyDown}
         onFocus={referenceProps.onFocus}
         onPointerDown={referenceProps.onPointerDown}

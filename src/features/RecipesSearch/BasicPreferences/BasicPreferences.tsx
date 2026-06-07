@@ -33,7 +33,7 @@ export const BasicPreferences = () => {
       }
       descriptionEl={
         <Typography>
-          We'll use this to find recipes that match your interests.
+          We'll use this to find recipes that match your preferred area.
           <br />
           <b>Tip: filter by Italian + Pasta to get the best results.</b>
         </Typography>
