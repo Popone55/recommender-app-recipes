@@ -1,17 +1,13 @@
-import { Button } from '@components/atoms/Button/Button'
 import { LoadingSpinner } from '@components/atoms/LoadingSpinner/LoadingSpinner'
-import { PillButton } from '@components/atoms/PillButton/PillButton'
 import { Card } from '@components/atoms/Typography/Card/Card'
 import { Typography } from '@components/atoms/Typography/Typography'
-import { ImageLoader } from '@components/molecules/ImageLoader/ImageLoader'
 import { TextInput } from '@components/molecules/TextInput/TextInput'
 import { useSearchRecipes } from '@hooks/api/query/useSearchRecipes'
 import { useDebounce } from '@hooks/useDebounce'
-import { Link } from '@tanstack/react-router'
 import clsx from 'clsx'
-import { ExternalLink } from 'lucide-react'
 import { useMemo, useState, type FC } from 'react'
 import style from './SearchByTerm.module.css'
+import { SearchResultCard } from './SearchResultCard/SearchResultCard'
 
 export const SearchByTerm: FC<{ className?: string }> = ({ className }) => {
   const [query, setQuery] = useState('')
@@ -70,35 +66,10 @@ export const SearchByTerm: FC<{ className?: string }> = ({ className }) => {
       )}
       <div className={style.results}>
         {data?.meals?.map((meal) => (
-          <Link
+          <SearchResultCard
             key={meal.idMeal}
-            to="/recipes/$id"
-            params={{ id: meal.idMeal }}
-            className={style.resultItemLink}>
-            <Card className={style.resultItem}>
-              <ImageLoader
-                src={meal.strMealThumb}
-                alt={meal.strMeal}
-                size={80}
-              />
-              <div className={style.resultItemContent}>
-                <div className={style.resultItemContentTitle}>
-                  <Typography
-                    size="m"
-                    weight="bold">
-                    {meal.strMeal}
-                  </Typography>
-                  {!!meal.strArea && <PillButton>{meal.strArea}</PillButton>}
-                </div>
-                <Button
-                  variant="neutral"
-                  size="small"
-                  endIcon={<ExternalLink size={16} />}>
-                  View recipe
-                </Button>
-              </div>
-            </Card>
-          </Link>
+            meal={meal}
+          />
         ))}
       </div>
     </Card>

@@ -9,6 +9,8 @@ import { useHistoryContext } from './context/useHistoryContext'
 export const History: FC<{ className?: string }> = ({ className }) => {
   const { feedbackItems } = useHistoryContext()
 
+  // I've put this guard because of requirements in the task description
+  // "Do you like it?" saved in localStorage with ID, title, and timestamp; History is visible."
   if (!feedbackItems?.length) return null
 
   return (

@@ -1,0 +1,25 @@
+.resultItem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xl);
+
+  .resultItemContent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--spacing-m);
+    flex-grow: 1;
+
+    .resultItemContentTitle {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: var(--spacing-m);
+    }
+  }
+}
+
+.resultItemLink {
+  text-decoration: none;
+  color: var(--neutral-900);
+}
